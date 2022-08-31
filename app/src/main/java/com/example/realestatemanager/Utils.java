@@ -7,10 +7,14 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -63,12 +67,13 @@ public class Utils {
     }
     */
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public static boolean isInternetAvailable(Context context) {
 
-        ConnectivityManager connMgr =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean isWifiConn = false;
         boolean isMobileConn = false;
+
         for (Network network : connMgr.getAllNetworks()) {
             NetworkInfo networkInfo = connMgr.getNetworkInfo(network);
             if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
@@ -79,9 +84,10 @@ public class Utils {
             }
             if (isWifiConn || isMobileConn) return true;
         }
-        Log.e("wifi status", "Wifi connected: " + isWifiConn);
-        Log.e("cellular status", "Mobile connected: " + isMobileConn);
-
         return false;
+    }
+
+    public static boolean test(boolean bool){
+        return bool;
     }
 }
