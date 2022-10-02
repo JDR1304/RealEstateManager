@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_detail_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.MainActivity"
+    tools:ignore="MergeRootFrame">
+
+    <!--com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/detail_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout-->
+
+
+    <!--androidx.core.widget.NestedScrollView
+        android:id="@+id/item_detail_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_detail_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/media"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Media"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:context="com.example.realestatemanager.UI.ItemDetailFragment" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/item_photo"
+                android:name="com.example.realestatemanager.ItemListFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/media"
+                tools:context="com.example.realestatemanager.UI.MainActivity"
+                tools:listitem="@layout/item_list_content" />
+
+            <TextView
+                android:id="@+id/description"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Description"
+                android:textIsSelectable="true"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_photo"
+                tools:context="com.example.realestatemanager.UI.ItemDetailFragment" />
+
+            <TextView
+                android:id="@+id/property_description"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:text="Text description for the property"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
+
+            <ImageView
+                android:id="@+id/image_view_surface"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="32dp"
+                android:paddingTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/property_description"
+                app:srcCompat="@drawable/ic_baseline_settings_overscan_24" />
+
+            <TextView
+                android:id="@+id/surface"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginTop="32dp"
+                android:text="Surface"
+                app:layout_constraintStart_toEndOf="@+id/image_view_surface"
+                app:layout_constraintTop_toBottomOf="@+id/property_description" />
+
+            <TextView
+                android:id="@+id/surface_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Square meters"
+                app:layout_constraintStart_toEndOf="@+id/image_view_surface"
+                app:layout_constraintTop_toBottomOf="@+id/surface" />
+
+            <ImageView
+                android:id="@+id/image_view_home"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/surface_value"
+                app:srcCompat="@drawable/ic_baseline_home_24" />
+
+            <TextView
+                android:id="@+id/number_of_rooms"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Number of rooms"
+                app:layout_constraintStart_toEndOf="@+id/image_view_home"
+                app:layout_constraintTop_toBottomOf="@+id/surface_value" />
+
+            <TextView
+                android:id="@+id/number_of_rooms_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Nb value"
+                app:layout_constraintStart_toEndOf="@+id/image_view_home"
+                app:layout_constraintTop_toBottomOf="@+id/number_of_rooms" />
+
+            <ImageView
+                android:id="@+id/Image_view_bathrooms"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/number_of_rooms_value"
+                app:srcCompat="@drawable/ic_baseline_bathtub_24" />
+
+            <TextView
+                android:id="@+id/number_of_bathrooms"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Number of bathrooms"
+                app:layout_constraintStart_toEndOf="@+id/Image_view_bathrooms"
+                app:layout_constraintTop_toBottomOf="@+id/number_of_rooms_value" />
+
+            <TextView
+                android:id="@+id/number_of_bathrooms_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Nb value"
+                app:layout_constraintStart_toEndOf="@+id/Image_view_bathrooms"
+                app:layout_constraintTop_toBottomOf="@+id/number_of_bathrooms" />
+
+            <ImageView
+                android:id="@+id/Image_view_bedrooms"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/number_of_bathrooms_value"
+                app:srcCompat="@drawable/ic_baseline_airline_seat_individual_suite_24" />
+
+            <TextView
+                android:id="@+id/number_of_bedrooms"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Number of bedrooms"
+                app:layout_constraintStart_toEndOf="@+id/Image_view_bedrooms"
+                app:layout_constraintTop_toBottomOf="@+id/number_of_bathrooms_value" />
+
+            <TextView
+                android:id="@+id/number_of_bedrooms_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Nb value"
+                app:layout_constraintStart_toEndOf="@+id/Image_view_bedrooms"
+                app:layout_constraintTop_toBottomOf="@+id/number_of_bedrooms" />
+
+            <ImageView
+                android:id="@+id/Image_view_location"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="50dp"
+                android:paddingTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/number_of_bathrooms"
+                app:layout_constraintTop_toBottomOf="@+id/property_description"
+                app:srcCompat="@drawable/ic_baseline_location_on_24" />
+
+            <TextView
+                android:id="@+id/street"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="32dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp"
+                android:layout_marginTop="32dp"
+                android:text="street"
+                app:layout_constraintStart_toEndOf="@+id/Image_view_location"
+                app:layout_constraintTop_toBottomOf="@+id/property_description" />
+
+            <TextView
+                android:id="@+id/post_code"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="Post code"
+                app:layout_constraintStart_toEndOf="@+id/Image_view_location"
+                app:layout_constraintTop_toBottomOf="@+id/street" />
+
+            <TextView
+                android:id="@+id/city"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="8dp"
+                android:text="City"
+                app:layout_constraintStart_toEndOf="@+id/Image_view_location"
+                app:layout_constraintTop_toBottomOf="@+id/post_code" />
+
+            <!--fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toEndOf="@+id/street"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/property_description"
+                /-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

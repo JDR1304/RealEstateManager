@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RealEstateManager</string>
+    <string name="title_item_detail">detail item title</string>
 </resources>

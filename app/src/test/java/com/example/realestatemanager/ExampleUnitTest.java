@@ -1,6 +1,5 @@
 package com.example.realestatemanager;
 
-import static android.content.ContentValues.TAG;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,14 +8,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,10 +28,12 @@ public class ExampleUnitTest {
 
     @Mock
     Context mockContext;
+
     @Mock
     ConnectivityManager mockConnectivityManager;
     @Mock
     NetworkInfo mockNetworkInfo;
+
     @Mock
     Network mockNetwork;
 
@@ -58,11 +57,9 @@ public class ExampleUnitTest {
 
     @Test
     public void isInternetAvailableTest(){
-        mockContext = mock(Context.class);
-        mockConnectivityManager = mock(ConnectivityManager.class);
-        mockNetworkInfo = mock(NetworkInfo.class);
-        mockNetwork = mock(Network.class);
-        Network [] allNetworks = mockConnectivityManager.getAllNetworks();
+        //Network [] allNetworks = mockConnectivityManager.getAllNetworks();
+        Network [] allNetworks = new Network[1];
+        allNetworks[0] = mockNetwork;
 
         when(mockContext.getSystemService(anyString())).thenReturn(mockConnectivityManager);
         when(mockConnectivityManager.getAllNetworks()).thenReturn(allNetworks);
