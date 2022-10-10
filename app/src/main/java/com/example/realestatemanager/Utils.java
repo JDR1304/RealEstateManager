@@ -3,19 +3,11 @@ package com.example.realestatemanager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
-import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
-import android.net.NetworkRequest;
-import android.net.wifi.WifiManager;
-import android.os.Build;
-import android.util.Log;
 
-import androidx.annotation.RequiresApi;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 
 /**

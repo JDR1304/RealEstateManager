@@ -17,6 +17,8 @@ public class Property {
     private double priceInDollars;
     private float surface;
     private int numberOfRooms;
+    private int numberOfBathrooms;
+    private int numberOfBedrooms;
     private String description;
     @Embedded
     private Address address;
@@ -34,13 +36,16 @@ public class Property {
 
 
     public Property(@NonNull String propertyType, double priceInDollars, float surface,
-                    int numberOfRooms, String description, @NonNull Address address, boolean pointsOfInterestSchool,
+                    int numberOfRooms,int numberOfBathrooms, int numberOfBedrooms, String description,
+                    @NonNull Address address, boolean pointsOfInterestSchool,
                     boolean pointsOfInterestPark, boolean pointsOfInterestStore, boolean propertyStatus,
                     long propertyEntryDate, long propertySaleDate, @NonNull String realEstateAgentName) {
         this.propertyType = propertyType;
         this.priceInDollars = priceInDollars;
         this.surface = surface;
         this.numberOfRooms = numberOfRooms;
+        this.numberOfBathrooms = numberOfBathrooms;
+        this.numberOfBedrooms = numberOfBedrooms;
         this.description = description;
         this.address = address;
         this.pointsOfInterestSchool = pointsOfInterestSchool;
@@ -92,6 +97,14 @@ public class Property {
     public void setNumberOfRooms(int numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
     }
+
+    public int getNumberOfBathrooms() { return numberOfBathrooms; }
+
+    public void setNumberOfBathrooms(int numberOfBathrooms) { this.numberOfBathrooms = numberOfBathrooms; }
+
+    public int getNumberOfBedrooms() { return numberOfBedrooms; }
+
+    public void setNumberOfBedrooms(int numberOfBedrooms) { numberOfBedrooms = numberOfBedrooms; }
 
     public String getDescription() {
         return description;

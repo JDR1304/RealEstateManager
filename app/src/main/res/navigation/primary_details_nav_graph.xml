@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/item_list_fragment"
         android:name="com.example.realestatemanager.UI.ItemList.ItemListFragment"
-        android:label="ItemListFragment">
+        android:label="@string/title_item_detail">
         <action
             android:id="@+id/show_item_detail"
             app:destination="@id/item_detail_fragment" />
@@ -18,11 +18,11 @@
     <fragment
         android:id="@+id/item_detail_fragment"
         android:name="com.example.realestatemanager.UI.ItemDetailFragment"
-        android:label="item_detail"
+        android:label="@string/title_item_detail"
         tools:layout="@layout/fragment_item_detail">
         <argument
             android:name="property_id"
-            android:defaultValue="0"
+            android:defaultValue=""
             app:argType="string" />
     </fragment>
 </navigation>

@@ -50,6 +50,8 @@ public abstract class RealEstateManagerDataBase extends RoomDatabase {
                 contentValues.put("priceInDollars", 1_000_000);
                 contentValues.put("surface", 120);
                 contentValues.put("numberOfRooms", 9);
+                contentValues.put("numberOfBathrooms", 2);
+                contentValues.put("numberOfBedRooms", 3);
                 contentValues.put("description", "In the center");
                 contentValues.put("pointsOfInterestSchool", false);
                 contentValues.put("pointsOfInterestPark", true);
@@ -65,9 +67,11 @@ public abstract class RealEstateManagerDataBase extends RoomDatabase {
 
                 ContentValues contentValuesProperty2 = new ContentValues();
                 contentValuesProperty2.put("propertyType", "Apartment");
-                contentValuesProperty2.put("priceInDollars", 1_000_000);
+                contentValuesProperty2.put("priceInDollars", 1_400_000);
                 contentValuesProperty2.put("surface", 100);
                 contentValuesProperty2.put("numberOfRooms", 8);
+                contentValuesProperty2.put("numberOfBathrooms", 3);
+                contentValuesProperty2.put("numberOfBedRooms", 4);
                 contentValuesProperty2.put("description", "next to the park");
                 contentValuesProperty2.put("pointsOfInterestSchool", false);
                 contentValuesProperty2.put("pointsOfInterestPark", true);

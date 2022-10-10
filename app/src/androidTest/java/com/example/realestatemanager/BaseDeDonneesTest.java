@@ -43,12 +43,12 @@ public class BaseDeDonneesTest {
     Address addressHouse = new Address("1 countryside avenue", 10021, "New York");
 
     Property propertyTest = new Property("Apartment", 1_000_000, 120,
-            8, "Apartment in front of the park", addressApartment,
+            8, 2,3, "Apartment in front of the park", addressApartment,
             false, true, true, false,
             1662826711, 0, "Jerome Diaz");
 
     Property property2Test = new Property("House", 2_000_000, 180,
-            9, "House in the countryside", addressHouse,
+            9,3,4, "House in the countryside", addressHouse,
             false, false, false, false,
             1662826711, 0, "Fabien Barry");
 
