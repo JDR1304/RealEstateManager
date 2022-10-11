@@ -15,6 +15,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.NumberPicker;
+import android.widget.Spinner;
 
 import com.example.realestatemanager.PropertyViewModel;
 import com.example.realestatemanager.R;
@@ -32,6 +36,12 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
     private View itemDetailFragmentContainer;
     private String PROPERTY_ID = "property_id";
     private long propertyId;
+    private Spinner spinnerType;
+    private NumberPicker numberPickerRooms;
+    private NumberPicker numberPickerBathrooms;
+    private NumberPicker numberPickerBedrooms;
+
+
 
 
     public CreateAndUpdatePropertyFragment() {
@@ -48,6 +58,31 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         }
         configureViewModel();
         getProperty();
+
+    }
+
+    private void spinnerManagement() {
+        String[] types = {"House", "apartment", "Penthouse", "Duplex"};
+
+        // Declaring an Adapter and initializing it to the data pump
+        ArrayAdapter adapter = new ArrayAdapter(
+                getActivity(), android.R.layout.simple_list_item_1, types);
+
+        // Setting Adapter to the Spinner
+        spinnerType.setAdapter(adapter);
+
+        // Setting OnItemClickListener to the Spinner
+        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -56,10 +91,12 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentCreateAndUpdatePropertyBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+       // spinnerManagement();
         return view;
     }
 
     public void initView() {
+        binding.type.setText(propertyWithPhoto.property.getPropertyType());
         binding.propertyDescription.setText(propertyWithPhoto.property.getDescription());
         binding.surfaceValue.setText(Float.toString(propertyWithPhoto.property.getSurface()));
         //binding.numberOfRoomsValue.setText(Float.toString(propertyWithPhoto.property.getNumberOfRooms()));

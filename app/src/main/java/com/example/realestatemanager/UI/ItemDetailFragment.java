@@ -43,7 +43,7 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
     private View itemDetailFragmentContainer;
 
     private PropertyWithPhoto propertyWithPhoto;
-    private String PROPERTY_ID = "property_id";
+    private final String PROPERTY_ID = "property_id";
     private long propertyId;
 
     private GoogleMap mMap;
@@ -169,7 +169,7 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
                 else {
                     fragmentTransaction.replace(R.id.nav_host_fragment_item_detail, newFragment);
                 }
-                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.addToBackStack("ItemDetailFragment");
                 fragmentTransaction.commit();
                 return true;
             default:
