@@ -104,7 +104,7 @@ public class Property {
 
     public int getNumberOfBedrooms() { return numberOfBedrooms; }
 
-    public void setNumberOfBedrooms(int numberOfBedrooms) { numberOfBedrooms = numberOfBedrooms; }
+    public void setNumberOfBedrooms(int numberOfBedrooms) { this.numberOfBedrooms = numberOfBedrooms; }
 
     public String getDescription() {
         return description;
