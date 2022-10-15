@@ -36,7 +36,7 @@
                 tools:context="com.example.realestatemanager.UI.ItemDetailFragment" />
 
             <Spinner
-                android:id="@+id/property_type_value"
+                android:id="@+id/spinner_property_type_value"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -52,17 +52,38 @@
             <TextView
                 android:id="@+id/media"
                 style="?android:attr/textAppearanceMedium"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
+                android:paddingRight="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="Media"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/type"
                 tools:context="com.example.realestatemanager.UI.ItemDetailFragment" />
+
+            <Button
+                android:id="@+id/add_media_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Add Media"
+                android:paddingStart="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/item_photo"
+                app:layout_constraintStart_toEndOf="@+id/media"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_property_type_value" />
+
+            <Button
+                android:id="@+id/take_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:paddingStart="8dp"
+                android:text="Take Picture"
+                app:layout_constraintBottom_toBottomOf="@+id/add_media_button"
+                app:layout_constraintStart_toEndOf="@+id/add_media_button" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -146,6 +167,7 @@
                 android:id="@+id/image_view_home"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="32dp"
                 android:paddingTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_view_surface"
@@ -156,6 +178,7 @@
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -165,9 +188,9 @@
 
             <NumberPicker
                 android:id="@+id/number_of_rooms_value"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -180,6 +203,7 @@
                 android:id="@+id/Image_view_bathrooms"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="43dp"
                 android:paddingTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_view_home"
@@ -190,6 +214,7 @@
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="43dp"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -199,10 +224,10 @@
 
             <NumberPicker
                 android:id="@+id/number_of_bathrooms_value"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="16dp"
-                android:orientation="horizontal"
+                android:layout_marginTop="24dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 app:layout_constraintStart_toEndOf="@+id/number_of_bathrooms"
@@ -212,6 +237,7 @@
                 android:id="@+id/Image_view_bedrooms"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="43dp"
                 android:paddingTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Image_view_bathrooms"
@@ -222,6 +248,7 @@
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="43dp"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -231,9 +258,9 @@
 
             <NumberPicker
                 android:id="@+id/number_of_bedrooms_value"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"

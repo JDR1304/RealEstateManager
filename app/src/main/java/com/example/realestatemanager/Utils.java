@@ -6,6 +6,8 @@ import android.net.Network;
 import android.net.NetworkInfo;
 
 
+import androidx.annotation.NonNull;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,7 +61,7 @@ public class Utils {
     }
     */
 
-    public static boolean isInternetAvailable(Context context) {
+    public static boolean isInternetAvailable(@NonNull Context context) {
 
         ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean isWifiConn = false;

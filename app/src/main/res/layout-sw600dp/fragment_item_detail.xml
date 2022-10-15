@@ -9,38 +9,12 @@
     tools:context=".UI.MainActivity"
     tools:ignore="MergeRootFrame">
 
-    <!--com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/detail_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_collapseMode="pin"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout-->
-
-
-    <!--androidx.core.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/item_detail_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="false"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_detail_fragment"
@@ -118,10 +92,10 @@
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:layout_marginTop="32dp"
                 android:text="Surface"
                 app:layout_constraintStart_toEndOf="@+id/image_view_surface"
                 app:layout_constraintTop_toBottomOf="@+id/property_description" />
@@ -241,8 +215,8 @@
                 android:id="@+id/Image_view_location"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
                 android:paddingTop="8dp"
                 app:layout_constraintStart_toEndOf="@+id/number_of_bathrooms"
                 app:layout_constraintTop_toBottomOf="@+id/property_description"
@@ -253,11 +227,11 @@
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="32dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="2dp"
                 android:layout_marginTop="32dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="32dp"
+                android:paddingBottom="2dp"
                 android:text="street"
                 app:layout_constraintStart_toEndOf="@+id/Image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/property_description" />
@@ -294,9 +268,10 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="32dp"
                 app:layout_constraintStart_toEndOf="@+id/street"
-                app:layout_constraintTop_toBottomOf="@+id/property_description"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/property_description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

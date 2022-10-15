@@ -36,7 +36,7 @@
                 tools:context="com.example.realestatemanager.UI.ItemDetailFragment" />
 
             <Spinner
-                android:id="@+id/property_type_value"
+                android:id="@+id/spinner_property_type_value"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"

@@ -101,6 +101,9 @@ public class ItemListFragment extends Fragment {
                         Bundle arguments = new Bundle();
                         arguments.putString(PROPERTY_ID, propertyId);
                         if (itemDetailFragmentContainer != null) {
+                            /*action = ItemListFragmentDirections.showItemDetail();
+                            action.setPropertyId(propertyId);
+                            Navigation.findNavController(getActivity(), R.id.fragment_item_detail).navigate(action);*/
                             Navigation.findNavController(itemDetailFragmentContainer)
                                     .navigate(R.id.fragment_item_detail, arguments);
                         } else {
@@ -128,6 +131,8 @@ public class ItemListFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         if (itemDetailFragmentContainer == null) {
             inflater.inflate(R.menu.menu_list, menu);
+        } else {
+            inflater.inflate(R.menu.whole_menu, menu);
         }
     }
 
@@ -140,23 +145,30 @@ public class ItemListFragment extends Fragment {
                     return true;
                 case R.id.add:
                     Toast.makeText(getActivity(), "Add List...", Toast.LENGTH_LONG).show();
-                    Fragment newFragment = new CreateAndUpdatePropertyFragment();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.nav_host_fragment_item_detail, newFragment);
-                    fragmentTransaction.addToBackStack("ItemListFragment");
-                    fragmentTransaction.commit();
                     return true;
-                /*case R.id.update:
-                    Toast.makeText(getActivity(), "Update List...", Toast.LENGTH_LONG).show();
-                    return true;*/
                 case R.id.search:
                     Toast.makeText(getActivity(), "Search List...", Toast.LENGTH_LONG).show();
                     return true;
                 default:
                     return super.onOptionsItemSelected(item);
             }
+        } else {
+            switch (item.getItemId()) {
+                case R.id.map:
+                    Toast.makeText(getActivity(), "COUCOU List tablet ...", Toast.LENGTH_LONG).show();
+                    return true;
+                case R.id.add:
+                    Toast.makeText(getActivity(), "Add List tablet...", Toast.LENGTH_LONG).show();
+                    return true;
+                case R.id.update:
+                    Toast.makeText(getActivity(), "Update List tablet...", Toast.LENGTH_LONG).show();
+                    return true;
+                case R.id.search:
+                    Toast.makeText(getActivity(), "Search List tablet...", Toast.LENGTH_LONG).show();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
-        return false;
     }
 }

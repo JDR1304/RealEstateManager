@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import android.location.Location;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.realestatemanager.PropertyViewModel;
 import com.example.realestatemanager.R;
+import com.example.realestatemanager.UI.ItemList.ItemListFragmentDirections;
 import com.example.realestatemanager.databinding.FragmentItemDetailBinding;
 import com.example.realestatemanager.injection.Injection;
 import com.example.realestatemanager.injection.ViewModelFactory;
@@ -33,7 +35,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-
 public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback {
@@ -41,6 +42,8 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
     private FragmentItemDetailBinding binding;
     private PropertyViewModel propertyViewModel;
     private View itemDetailFragmentContainer;
+
+    private ItemDetailFragmentDirections.ActionItemDetailFragmentToCreateUpdateContainer action;
 
     private PropertyWithPhoto propertyWithPhoto;
     private final String PROPERTY_ID = "property_id";
@@ -147,34 +150,39 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
-   @Override
+    @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_details, menu);
+        if (itemDetailFragmentContainer == null) {
+            inflater.inflate(R.menu.menu_details, menu);
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.update:
-                Toast.makeText(getActivity(), "Update ...", Toast.LENGTH_LONG).show();
-                Bundle bundle = new Bundle();
-                bundle.putLong(PROPERTY_ID, propertyId);
-                Fragment newFragment = new CreateAndUpdatePropertyFragment();
-                newFragment.setArguments(bundle);
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                if (itemDetailFragmentContainer != null){
-                    fragmentTransaction.replace(R.id.item_detail_nav_container, newFragment);
-                }
-                else {
-                    fragmentTransaction.replace(R.id.nav_host_fragment_item_detail, newFragment);
-                }
-                fragmentTransaction.addToBackStack("ItemDetailFragment");
-                fragmentTransaction.commit();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+        if (itemDetailFragmentContainer == null) {
+            switch (item.getItemId()) {
+                case R.id.update:
+                    Toast.makeText(getActivity(), "Update mobile...", Toast.LENGTH_LONG).show();
 
+                    Bundle arguments = new Bundle();
+                    arguments.putString(PROPERTY_ID, Long.toString(propertyId));
+
+                    if (itemDetailFragmentContainer != null) {
+                    /*action = ItemDetailFragmentDirections.actionItemDetailFragmentToCreateUpdateContainer();
+                    action.setPropertyId(Long.toString(propertyId));
+                    Navigation.findNavController(getActivity(), R.id.fragment_item_detail).navigate(action);*/
+                        Navigation.findNavController(itemDetailFragmentContainer)
+                                .navigate(R.id.fragment_item_detail, arguments);
+                    } else {
+                        action = ItemDetailFragmentDirections.actionItemDetailFragmentToCreateUpdateContainer();
+                        action.setPropertyId(Long.toString(propertyId));
+                        Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail).navigate(action);
+                    }
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }
+        return false;
+    }
 }

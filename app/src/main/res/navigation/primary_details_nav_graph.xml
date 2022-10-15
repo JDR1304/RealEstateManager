@@ -9,7 +9,8 @@
     <fragment
         android:id="@+id/item_list_fragment"
         android:name="com.example.realestatemanager.UI.ItemList.ItemListFragment"
-        android:label="@string/title_item_detail">
+        android:label="@string/title_item_detail"
+        tools:layout="@layout/fragment_item_list">
         <action
             android:id="@+id/show_item_detail"
             app:destination="@id/item_detail_fragment" />
@@ -24,5 +25,20 @@
             android:name="property_id"
             android:defaultValue=""
             app:argType="string" />
+        <action
+            android:id="@+id/action_item_detail_fragment_to_create_update_container"
+            app:destination="@id/create_update_container" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/create_update_container"
+        android:name="com.example.realestatemanager.UI.CreateAndUpdatePropertyFragment"
+        android:label="@string/update_property"
+        tools:layout="@layout/fragment_create_and_update_property">
+    <argument
+        android:name="property_id"
+        android:defaultValue=""
+        app:argType="string" />
+
     </fragment>
 </navigation>
