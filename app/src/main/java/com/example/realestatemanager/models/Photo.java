@@ -1,7 +1,7 @@
 package com.example.realestatemanager.models;
 
 import android.net.Uri;
-
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -10,6 +10,7 @@ public class Photo {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
+    @NonNull
     private long propertyId;
     private String name;
     private String stringPhoto;

@@ -19,9 +19,6 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -37,7 +34,6 @@ import com.example.realestatemanager.R;
 import com.example.realestatemanager.databinding.FragmentCreateAndUpdatePropertyBinding;
 import com.example.realestatemanager.injection.Injection;
 import com.example.realestatemanager.injection.ViewModelFactory;
-import com.example.realestatemanager.models.Address;
 import com.example.realestatemanager.models.Photo;
 import com.example.realestatemanager.models.PropertyWithPhoto;
 
@@ -54,23 +50,24 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
     private FragmentCreateAndUpdatePropertyBinding binding;
     private PropertyWithPhoto propertyWithPhoto;
     private PropertyViewModel propertyViewModel;
-    private View itemDetailFragmentContainer;
-    private String PROPERTY_ID = "property_id";
+    private final String PROPERTY_ID = "property_id";
     private long propertyId;
     private Spinner spinnerType;
     private NumberPicker numberPickerRooms;
     private NumberPicker numberPickerBathrooms;
     private NumberPicker numberPickerBedrooms;
-    private String[] types = {"House", "Apartment", "Penthouse", "Duplex"};
+    private final String[] types = {"House", "Apartment", "Penthouse", "Duplex"};
 
     private Button addMedia;
     private Button takePicture;
     private ImageView photo;
     private Uri photoURI;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private final int GALLERY_IMAGE_CAPTURE = 100;
+    private final int REQUEST_IMAGE_CAPTURE = 1;
     private String currentPhotoPath;
 
-    private List<Photo> photos = new ArrayList<>();
+    private List<Photo> pictures = new ArrayList<>();
 
 
     public CreateAndUpdatePropertyFragment() {
@@ -168,12 +165,13 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         numberPickerBedrooms.setMinValue(0);
     }
 
-    public void spinnerListener(){
+    public void spinnerListener() {
         spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 propertyWithPhoto.property.setPropertyType(types[position]);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -205,7 +203,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
 
     }
 
-    public void surfaceValueListener(){
+    public void surfaceValueListener() {
         binding.surfaceValue.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -214,7 +212,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()!=0) {
+                if (s.length() != 0) {
                     propertyWithPhoto.property.setSurface(Float.valueOf(String.valueOf(s)));
                 }
             }
@@ -226,7 +224,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         });
     }
 
-    public void addressListener(){
+    public void addressListener() {
         binding.street.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -235,7 +233,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()!=0) {
+                if (s.length() != 0) {
                     propertyWithPhoto.property.getAddress().setStreet(String.valueOf(s));
                 }
             }
@@ -254,7 +252,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()!=0) {
+                if (s.length() != 0) {
                     propertyWithPhoto.property.getAddress().setPostCode(Integer.valueOf(String.valueOf(s)));
                 }
             }
@@ -273,7 +271,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()!=0) {
+                if (s.length() != 0) {
                     propertyWithPhoto.property.getAddress().setCity(String.valueOf(s));
                 }
             }
@@ -285,7 +283,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         });
     }
 
-    public void descriptionListener(){
+    public void descriptionListener() {
         binding.propertyDescription.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -294,7 +292,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()!=0) {
+                if (s.length() != 0) {
                     propertyWithPhoto.property.setDescription(String.valueOf(s));
                 }
             }
@@ -312,7 +310,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Add Picture ...", Toast.LENGTH_LONG).show();
                 Intent galleryPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryPhotoIntent, 100);
+                startActivityForResult(galleryPhotoIntent, GALLERY_IMAGE_CAPTURE);
             }
         });
     }
@@ -321,7 +319,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 && resultCode == RESULT_OK) {
+        if (requestCode == GALLERY_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             // Get image from data
             Uri selectedImage = data.getData();
             Bitmap image = null;
@@ -331,18 +329,18 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
                 e.printStackTrace();
             }
             String uriToStringPhoto = selectedImage.toString();
-            photos.add(new Photo(propertyId, uriToStringPhoto, uriToStringPhoto));
-
+            propertyWithPhoto.photos.add(new Photo(propertyId, uriToStringPhoto, uriToStringPhoto));
 
             //photo.setImageBitmap(image);
-
-
         }
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            photo.setImageURI(photoURI);
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+           // photo.setImageURI(photoURI);
+            //photos.add(new Photo(propertyId, photoURI.toString(), photoURI.toString()));
+            propertyWithPhoto.photos.add(new Photo(propertyId, photoURI.toString(), photoURI.toString()));
 
         } else {
-            Toast.makeText(getActivity(), "Picture not selected", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Picture not shot", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -397,8 +395,8 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         Toast.makeText(getActivity(), "On Detach", Toast.LENGTH_LONG).show();
+        propertyViewModel.updatePropertyWithPhotos(propertyWithPhoto.property, propertyWithPhoto.photos);
 
-        propertyViewModel.updatePropertyWithPhotos(propertyWithPhoto.property, photos);
     }
 
 

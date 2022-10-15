@@ -87,11 +87,12 @@ public class ItemListFragment extends Fragment {
 
 
     public void getProperties() {
-        propertyWithPhotoList.clear();
+
         Observer<List<PropertyWithPhoto>> results = new Observer<List<PropertyWithPhoto>>() {
 
             @Override
             public void onChanged(List<PropertyWithPhoto> propertyWithPhotos) {
+                propertyWithPhotoList.clear();
                 for (int i = 0; i < propertyWithPhotos.size(); i++) {
                     propertyWithPhotoList.add(propertyWithPhotos.get(i));
                 }
