@@ -4,12 +4,13 @@ package com.example.realestatemanager.UI;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,7 +23,6 @@ import android.widget.Toast;
 
 import com.example.realestatemanager.PropertyViewModel;
 import com.example.realestatemanager.R;
-import com.example.realestatemanager.UI.ItemList.ItemListFragmentDirections;
 import com.example.realestatemanager.databinding.FragmentItemDetailBinding;
 import com.example.realestatemanager.injection.Injection;
 import com.example.realestatemanager.injection.ViewModelFactory;
@@ -33,6 +33,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 
 public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocationButtonClickListener,
@@ -51,6 +53,7 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
 
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
+    private static final int DEFAULT_ZOOM = 16;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -119,6 +122,9 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
             public void onChanged(PropertyWithPhoto property) {
                 propertyWithPhoto = property;
                 initView();
+                LatLng propertyPosition = getLocationFromAddress(getActivity(),getAddress());
+                mMap.addMarker(new MarkerOptions().position(propertyPosition).title("Property Position"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(propertyPosition, DEFAULT_ZOOM));
             }
         };
         propertyViewModel.getProperty(propertyId).observe(getActivity(), propertyWithPhotoObserver);
@@ -141,15 +147,46 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
 
     }
 
+    public String getAddress(){
+        String address = propertyWithPhoto.property.getAddress().getStreet() +" "+
+                propertyWithPhoto.property.getAddress().getPostCode()+" "+
+                propertyWithPhoto.property.getAddress().getCity();
+
+        return address;
+    }
+
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
+        //LatLng propertyPosition = getLocationFromAddress(getActivity(),getAddress());
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        //mMap.addMarker(new MarkerOptions().position(propertyPosition).title("Marker in Sydney"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(propertyPosition));
+       /* LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
 
+    public LatLng getLocationFromAddress(Context context, String strAddress) {
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+
+        try {
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+
+            p1 = new LatLng(location.getLatitude(), location.getLongitude());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return p1;
+    }
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         if (itemDetailFragmentContainer == null) {
