@@ -22,6 +22,33 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/property_price"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Property price"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:context="com.example.realestatemanager.UI.ItemDetailFragment" />
+
+            <EditText
+                android:id="@+id/property_price_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:hint="Property price"
+                app:layout_constraintStart_toEndOf="@+id/property_price"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:id="@+id/type"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
@@ -32,7 +59,7 @@
                 android:text="Property type"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/property_price"
                 tools:context="com.example.realestatemanager.UI.ItemDetailFragment" />
 
             <Spinner
@@ -46,24 +73,43 @@
                 android:hint="Property type"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/type"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/property_price"
                 tools:context="com.example.realestatemanager.UI.ItemDetailFragment" />
 
             <TextView
                 android:id="@+id/media"
                 style="?android:attr/textAppearanceMedium"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="Media"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/type"
                 tools:context="com.example.realestatemanager.UI.ItemDetailFragment" />
 
+            <Button
+                android:id="@+id/add_media_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Add Media"
+                android:paddingStart="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/item_photo"
+                app:layout_constraintStart_toEndOf="@+id/media"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_property_type_value" />
+
+            <Button
+                android:id="@+id/take_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:paddingStart="8dp"
+                android:text="Take Picture"
+                app:layout_constraintBottom_toBottomOf="@+id/add_media_button"
+                app:layout_constraintStart_toEndOf="@+id/add_media_button" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/item_photo"
@@ -244,7 +290,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/number_of_bathrooms_value" />
 
             <ImageView
-                android:id="@+id/Image_view_location"
+                android:id="@+id/image_view_location"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
@@ -262,7 +308,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="2dp"
                 android:hint="Street"
-                app:layout_constraintStart_toEndOf="@+id/Image_view_location"
+                app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/number_of_bedrooms" />
 
             <EditText
@@ -274,7 +320,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
                 android:hint="Post code"
-                app:layout_constraintStart_toEndOf="@+id/Image_view_location"
+                app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/street" />
 
             <EditText
@@ -286,8 +332,48 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
                 android:hint="City"
-                app:layout_constraintStart_toEndOf="@+id/Image_view_location"
+                app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/post_code" />
+
+            <TextView
+                android:id="@+id/points_of_interest"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Points of interest"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/city"/>
+
+
+            <CheckBox
+                android:id="@+id/chek_box_school"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="School"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/points_of_interest"/>
+
+            <CheckBox
+                android:id="@+id/chek_box_park"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Park"
+                app:layout_constraintStart_toEndOf="@+id/chek_box_school"
+                app:layout_constraintTop_toBottomOf="@+id/points_of_interest"/>
+
+            <CheckBox
+                android:id="@+id/chek_box_store"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Store"
+                app:layout_constraintStart_toEndOf="@+id/chek_box_park"
+                app:layout_constraintTop_toBottomOf="@+id/points_of_interest"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

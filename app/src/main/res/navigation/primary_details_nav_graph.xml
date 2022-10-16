@@ -14,6 +14,9 @@
         <action
             android:id="@+id/show_item_detail"
             app:destination="@id/item_detail_fragment" />
+        <action
+            android:id="@+id/action_item_list_fragment_to_create_update_container"
+            app:destination="@id/create_update_container" />
     </fragment>
 
     <fragment
@@ -22,9 +25,10 @@
         android:label="@string/title_item_detail"
         tools:layout="@layout/fragment_item_detail">
         <argument
-            android:name="property_id"
-            android:defaultValue=""
-            app:argType="string" />
+            android:name="property_id_details"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true"/>
         <action
             android:id="@+id/action_item_detail_fragment_to_create_update_container"
             app:destination="@id/create_update_container" />
@@ -36,9 +40,10 @@
         android:label="@string/update_property"
         tools:layout="@layout/fragment_create_and_update_property">
     <argument
-        android:name="property_id"
-        android:defaultValue=""
-        app:argType="string" />
+        android:name="property_id_create_update"
+        android:defaultValue="@null"
+        app:argType="string"
+        app:nullable="true"/>
 
     </fragment>
 </navigation>

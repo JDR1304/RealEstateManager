@@ -12,7 +12,6 @@ public class Property {
 
     @PrimaryKey (autoGenerate = true)
     private long id;
-    @NonNull
     private String propertyType;
     private double priceInDollars;
     private float surface;
@@ -28,18 +27,17 @@ public class Property {
     private boolean propertyStatus;
     private long propertyEntryDate;
     private long propertySaleDate;
-    @NonNull
     private String realEstateAgentName;
 
     /** Key for PROPERTY **/
     public static final String PROPERTY_KEY = "PROPERTY_KEY";
 
 
-    public Property(@NonNull String propertyType, double priceInDollars, float surface,
+    public Property(String propertyType, double priceInDollars, float surface,
                     int numberOfRooms,int numberOfBathrooms, int numberOfBedrooms, String description,
-                    @NonNull Address address, boolean pointsOfInterestSchool,
+                    Address address, boolean pointsOfInterestSchool,
                     boolean pointsOfInterestPark, boolean pointsOfInterestStore, boolean propertyStatus,
-                    long propertyEntryDate, long propertySaleDate, @NonNull String realEstateAgentName) {
+                    long propertyEntryDate, long propertySaleDate, String realEstateAgentName) {
         this.propertyType = propertyType;
         this.priceInDollars = priceInDollars;
         this.surface = surface;

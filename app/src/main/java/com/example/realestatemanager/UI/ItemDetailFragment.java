@@ -46,7 +46,7 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
     private ItemDetailFragmentDirections.ActionItemDetailFragmentToCreateUpdateContainer action;
 
     private PropertyWithPhoto propertyWithPhoto;
-    private final String PROPERTY_ID = "property_id";
+    private final String PROPERTY_ID_DETAILS = "property_id_details";
     private long propertyId;
 
     private GoogleMap mMap;
@@ -64,7 +64,7 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         if (getArguments() != null) {
-            propertyId = Long.parseLong(getArguments().getString(PROPERTY_ID));
+            propertyId = Long.parseLong(getArguments().getString(PROPERTY_ID_DETAILS));
         }
         configureViewModel();
 
@@ -165,7 +165,7 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
                     Toast.makeText(getActivity(), "Update mobile...", Toast.LENGTH_LONG).show();
 
                     Bundle arguments = new Bundle();
-                    arguments.putString(PROPERTY_ID, Long.toString(propertyId));
+                    arguments.putString(PROPERTY_ID_DETAILS, Long.toString(propertyId));
 
                     if (itemDetailFragmentContainer != null) {
                     /*action = ItemDetailFragmentDirections.actionItemDetailFragmentToCreateUpdateContainer();
@@ -175,7 +175,7 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
                                 .navigate(R.id.fragment_item_detail, arguments);
                     } else {
                         action = ItemDetailFragmentDirections.actionItemDetailFragmentToCreateUpdateContainer();
-                        action.setPropertyId(Long.toString(propertyId));
+                        action.setPropertyIdCreateUpdate(Long.toString(propertyId));
                         Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail).navigate(action);
                     }
                     return true;

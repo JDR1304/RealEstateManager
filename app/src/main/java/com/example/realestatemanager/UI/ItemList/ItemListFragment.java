@@ -24,6 +24,7 @@ import com.example.realestatemanager.PropertyViewModel;
 import com.example.realestatemanager.R;
 import com.example.realestatemanager.RetrieveIdPropertyId;
 import com.example.realestatemanager.UI.CreateAndUpdatePropertyFragment;
+import com.example.realestatemanager.UI.ItemDetailFragmentDirections;
 import com.example.realestatemanager.databinding.FragmentItemListBinding;
 import com.example.realestatemanager.injection.Injection;
 import com.example.realestatemanager.injection.ViewModelFactory;
@@ -42,8 +43,9 @@ public class ItemListFragment extends Fragment {
     private ListViewRecyclerViewAdapter listViewRecyclerViewAdapter;
     private List<PropertyWithPhoto> propertyWithPhotoList = new ArrayList<>();
     private ItemListFragmentDirections.ShowItemDetail action;
+    private ItemListFragmentDirections.ActionItemListFragmentToCreateUpdateContainer actionCreate;
 
-    private String PROPERTY_ID = "property_id";
+    private String PROPERTY_ID_DETAILS = "property_id_details";
     private View itemDetailFragmentContainer;
 
 
@@ -99,17 +101,17 @@ public class ItemListFragment extends Fragment {
                 listViewRecyclerViewAdapter = new ListViewRecyclerViewAdapter(propertyWithPhotoList, propertyViewModel, new RetrieveIdPropertyId() {
                     @Override
                     public void onClickItem(String propertyId) {
-                        Bundle arguments = new Bundle();
-                        arguments.putString(PROPERTY_ID, propertyId);
+                        //Bundle arguments = new Bundle();
+                        //arguments.putString(PROPERTY_ID, propertyId);
                         if (itemDetailFragmentContainer != null) {
                             /*action = ItemListFragmentDirections.showItemDetail();
                             action.setPropertyId(propertyId);
                             Navigation.findNavController(getActivity(), R.id.fragment_item_detail).navigate(action);*/
-                            Navigation.findNavController(itemDetailFragmentContainer)
-                                    .navigate(R.id.fragment_item_detail, arguments);
+                            //Navigation.findNavController(itemDetailFragmentContainer)
+                                    //.navigate(R.id.fragment_item_detail, arguments);
                         } else {
                             action = ItemListFragmentDirections.showItemDetail();
-                            action.setPropertyId(propertyId);
+                            action.setPropertyIdDetails(propertyId);
                             Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail).navigate(action);
                         }
                     }
@@ -146,6 +148,9 @@ public class ItemListFragment extends Fragment {
                     return true;
                 case R.id.add:
                     Toast.makeText(getActivity(), "Add List...", Toast.LENGTH_LONG).show();
+                    actionCreate = ItemListFragmentDirections.actionItemListFragmentToCreateUpdateContainer();
+                    actionCreate.setPropertyIdCreateUpdate(null);
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail).navigate(actionCreate);
                     return true;
                 case R.id.search:
                     Toast.makeText(getActivity(), "Search List...", Toast.LENGTH_LONG).show();

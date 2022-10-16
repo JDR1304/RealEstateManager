@@ -212,7 +212,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/number_of_bedrooms" />
 
             <ImageView
-                android:id="@+id/Image_view_location"
+                android:id="@+id/image_view_location"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
@@ -233,7 +233,7 @@
                 android:paddingEnd="32dp"
                 android:paddingBottom="2dp"
                 android:text="street"
-                app:layout_constraintStart_toEndOf="@+id/Image_view_location"
+                app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/property_description" />
 
             <TextView
@@ -245,7 +245,7 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:text="Post code"
-                app:layout_constraintStart_toEndOf="@+id/Image_view_location"
+                app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/street" />
 
             <TextView
@@ -257,7 +257,7 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="8dp"
                 android:text="City"
-                app:layout_constraintStart_toEndOf="@+id/Image_view_location"
+                app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/post_code" />
 
             <fragment

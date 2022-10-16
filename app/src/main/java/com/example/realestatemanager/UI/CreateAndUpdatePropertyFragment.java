@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
@@ -34,7 +35,9 @@ import com.example.realestatemanager.R;
 import com.example.realestatemanager.databinding.FragmentCreateAndUpdatePropertyBinding;
 import com.example.realestatemanager.injection.Injection;
 import com.example.realestatemanager.injection.ViewModelFactory;
+import com.example.realestatemanager.models.Address;
 import com.example.realestatemanager.models.Photo;
+import com.example.realestatemanager.models.Property;
 import com.example.realestatemanager.models.PropertyWithPhoto;
 
 import java.io.File;
@@ -50,7 +53,8 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
     private FragmentCreateAndUpdatePropertyBinding binding;
     private PropertyWithPhoto propertyWithPhoto;
     private PropertyViewModel propertyViewModel;
-    private final String PROPERTY_ID = "property_id";
+    private Address address;
+    private final String PROPERTY_ID_CREATE_UPDATE = "property_id_create_update";
     private long propertyId;
     private Spinner spinnerType;
     private NumberPicker numberPickerRooms;
@@ -78,11 +82,25 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            propertyId = Long.parseLong(getArguments().getString(PROPERTY_ID));
+        // getArguments != null when you want to update
+        if (getArguments() != null && getArguments().getString(PROPERTY_ID_CREATE_UPDATE)!= null) {
+            propertyId = Long.parseLong(getArguments().getString(PROPERTY_ID_CREATE_UPDATE));
         }
         configureViewModel();
-        getProperty();
+        if (getArguments().getString(PROPERTY_ID_CREATE_UPDATE)!= null) {
+            //getArguments == null when we want to create a new property
+            getProperty();
+        }
+        else{
+            long currentTime = System.currentTimeMillis();
+            propertyWithPhoto = new PropertyWithPhoto();
+            address = new Address(null,0,null);
+            propertyWithPhoto.property = new Property("Apartment",0,0,
+                    0,0,0,null,address,
+                    false,false,false,
+                    false,currentTime,0,null);
+            propertyWithPhoto.photos = new ArrayList<>();
+        }
 
     }
 
@@ -103,6 +121,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        priceListener();
         descriptionListener();
         spinnerListener();
         pickersListeners();
@@ -110,7 +129,8 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         addressListener();
         addNewPicture();
         onClickListenerTake();
-
+        checkBoxListener();
+        agentNameListener();
     }
 
     private void configureViewModel() {
@@ -135,6 +155,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
                 binding.spinnerPropertyTypeValue.setSelection(i);
             }
         }
+        binding.propertyPriceValue.setText(Double.toString(propertyWithPhoto.property.getPriceInDollars()));
         binding.propertyDescription.setText(propertyWithPhoto.property.getDescription());
         binding.surfaceValue.setText(Float.toString(propertyWithPhoto.property.getSurface()));
         binding.numberOfRoomsValue.setValue(propertyWithPhoto.property.getNumberOfRooms());
@@ -143,6 +164,11 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         binding.street.setText(propertyWithPhoto.property.getAddress().getStreet());
         binding.postCode.setText(Integer.toString(propertyWithPhoto.property.getAddress().getPostCode()));
         binding.city.setText(propertyWithPhoto.property.getAddress().getCity());
+        binding.chekBoxPark.setChecked(propertyWithPhoto.property.isPointsOfInterestPark());
+        binding.chekBoxSchool.setChecked(propertyWithPhoto.property.isPointsOfInterestSchool());
+        binding.chekBoxStore.setChecked(propertyWithPhoto.property.isPointsOfInterestStore());
+        binding.agentNameValue.setText(propertyWithPhoto.property.getRealEstateAgentName());
+        binding.checkBoxStatus.setChecked(propertyWithPhoto.property.isPropertyStatus());
     }
 
     private void initSpinner(View view) {
@@ -165,6 +191,26 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         numberPickerBedrooms.setMinValue(0);
     }
 
+    public void priceListener(){
+        binding.propertyPriceValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() != 0) {
+                    propertyWithPhoto.property.setPriceInDollars(Double.valueOf(String.valueOf(s)));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
     public void spinnerListener() {
         spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -304,6 +350,66 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         });
     }
 
+    public void agentNameListener(){
+        binding.agentNameValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length()>0){
+                    propertyWithPhoto.property.setRealEstateAgentName(String.valueOf(s));
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    public void checkBoxListener(){
+
+        binding.chekBoxSchool.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                propertyWithPhoto.property.setPointsOfInterestSchool(isChecked);
+            }
+        });
+
+        binding.chekBoxPark.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                propertyWithPhoto.property.setPointsOfInterestPark(isChecked);
+            }
+        });
+
+        binding.chekBoxStore.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                propertyWithPhoto.property.setPointsOfInterestStore(isChecked);
+            }
+        });
+
+        binding.checkBoxStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                propertyWithPhoto.property.setPropertyStatus(isChecked);
+                if (isChecked == true){
+                    long currentTime = System.currentTimeMillis();
+                    propertyWithPhoto.property.setPropertySaleDate(currentTime);
+                }else{
+                    propertyWithPhoto.property.setPropertySaleDate(0);
+                }
+            }
+        });
+
+    }
+
     public void addNewPicture() {
         addMedia.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -395,9 +501,11 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         Toast.makeText(getActivity(), "On Detach", Toast.LENGTH_LONG).show();
-        propertyViewModel.updatePropertyWithPhotos(propertyWithPhoto.property, propertyWithPhoto.photos);
-
+        if(getArguments().getString(PROPERTY_ID_CREATE_UPDATE)!= null) {
+            propertyViewModel.updatePropertyWithPhotos(propertyWithPhoto.property, propertyWithPhoto.photos);
+        }
+        else{
+            propertyViewModel.createPropertyWithPhotos(propertyWithPhoto.property,propertyWithPhoto.photos);
+        }
     }
-
-
 }

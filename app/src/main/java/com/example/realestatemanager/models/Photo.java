@@ -10,7 +10,6 @@ public class Photo {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
-    @NonNull
     private long propertyId;
     private String name;
     private String stringPhoto;
