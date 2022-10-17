@@ -29,6 +29,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -39,7 +40,10 @@ public class MapsFragment extends Fragment {
     private GoogleMap mMap;
     private static final int DEFAULT_ZOOM = 16;
     private PropertyViewModel propertyViewModel;
+    private long property_id;
+    private final String PROPERTY_ID_DETAILS = "property_id_details";
     private List<PropertyWithPhoto> propertyWithPhotoList = new ArrayList<>();
+
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -96,12 +100,27 @@ public class MapsFragment extends Fragment {
                 propertyWithPhotoList.clear();
                 for (int i = 0; i < propertyWithPhotos.size(); i++) {
                     propertyWithPhotoList.add(propertyWithPhotos.get(i));
-                    LatLng propertyPosition = getLocationFromAddress(getActivity(),getAddress(propertyWithPhotos.get(i)));
-                    mMap.addMarker(new MarkerOptions().position(propertyPosition).title("Property Position"));
+                    LatLng propertyPosition = getLocationFromAddress(getActivity(), getAddress(propertyWithPhotos.get(i)));
+                    mMap.addMarker(new MarkerOptions().position(propertyPosition).title(Long.toString(propertyWithPhotos.get(i).property.getId())));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(propertyPosition, DEFAULT_ZOOM));
                 }
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(@NonNull Marker marker) {
+                            for (int i = 0; i < propertyWithPhotos.size(); i++) {
+                                if ((propertyWithPhotos.get(i).property.getId()) == (Long.parseLong(marker.getTitle()))) {
+                                    property_id = propertyWithPhotos.get(i).property.getId();
+                                }
+                            }
+                        Bundle arguments = new Bundle();
+                        arguments.putString(PROPERTY_ID_DETAILS, Long.toString(property_id));
+                            Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
+                                    .navigate(R.id.action_mapsFragment_to_item_detail_fragment, arguments);
 
+                        return false;
+                    }
 
+                });
             }
         };
         propertyViewModel.getProperties().observe(getActivity(), results);
