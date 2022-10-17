@@ -1,5 +1,8 @@
 package com.example.realestatemanager.repository;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 import com.example.realestatemanager.database.PropertyDAO;
 import com.example.realestatemanager.models.Photo;
@@ -17,10 +20,11 @@ public class PropertyRepository {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void createPropertyWithPhotos(Property property, List <Photo> photos){
-        this.propertyDAO.createProperty(property);
-        this.propertyDAO.createPhotos(photos);
-
+        //this.propertyDAO.createProperty(property);
+        //this.propertyDAO.createPhotos(photos);
+        propertyDAO.createPropertyWithPhotos(property, photos);
     }
 
 

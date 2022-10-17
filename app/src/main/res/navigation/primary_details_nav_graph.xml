@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -17,6 +16,11 @@
         <action
             android:id="@+id/action_item_list_fragment_to_create_update_container"
             app:destination="@id/create_update_container" />
+        <action
+            android:id="@+id/action_item_list_fragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+
+
     </fragment>
 
     <fragment
@@ -28,7 +32,7 @@
             android:name="property_id_details"
             android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"/>
+            app:nullable="true" />
         <action
             android:id="@+id/action_item_detail_fragment_to_create_update_container"
             app:destination="@id/create_update_container" />
@@ -39,11 +43,16 @@
         android:name="com.example.realestatemanager.UI.CreateAndUpdatePropertyFragment"
         android:label="@string/update_property"
         tools:layout="@layout/fragment_create_and_update_property">
-    <argument
-        android:name="property_id_create_update"
-        android:defaultValue="@null"
-        app:argType="string"
-        app:nullable="true"/>
-
+        <argument
+            android:name="property_id_create_update"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.realestatemanager.UI.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+
 </navigation>

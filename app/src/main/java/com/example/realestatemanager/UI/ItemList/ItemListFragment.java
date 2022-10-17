@@ -45,6 +45,7 @@ public class ItemListFragment extends Fragment {
     private ItemListFragmentDirections.ShowItemDetail action;
     private ItemListFragmentDirections.ActionItemListFragmentToCreateUpdateContainer actionCreate;
 
+
     private String PROPERTY_ID_DETAILS = "property_id_details";
     private View itemDetailFragmentContainer;
 
@@ -145,6 +146,7 @@ public class ItemListFragment extends Fragment {
             switch (item.getItemId()) {
                 case R.id.map:
                     Toast.makeText(getActivity(), "COUCOU List ...", Toast.LENGTH_LONG).show();
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail).navigate(R.id.action_item_list_fragment_to_mapsFragment);
                     return true;
                 case R.id.add:
                     Toast.makeText(getActivity(), "Add List...", Toast.LENGTH_LONG).show();
