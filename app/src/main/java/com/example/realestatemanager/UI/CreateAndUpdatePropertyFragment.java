@@ -5,10 +5,12 @@ import static android.app.Activity.RESULT_OK;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -62,6 +64,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
     private NumberPicker numberPickerBedrooms;
     private final String[] types = {"House", "Apartment", "Penthouse", "Duplex"};
 
+    private Button createOrUpdateBtn;
     private Button addMedia;
     private Button takePicture;
     private ImageView photo;
@@ -113,6 +116,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         View view = binding.getRoot();
         initPickers(view);
         initSpinner(view);
+        createOrUpdateBtn = view.findViewById(R.id.create_or_update_button);
         addMedia = view.findViewById(R.id.add_media_button);
         takePicture = view.findViewById(R.id.take_picture);
         return view;
@@ -497,6 +501,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         return image;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onDetach() {
         super.onDetach();

@@ -1,5 +1,8 @@
 package com.example.realestatemanager;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -16,11 +19,13 @@ public class PropertyViewModel extends ViewModel {
     private PropertyRepository dataSourceProperty;
     private Executor executor;
 
+
     public PropertyViewModel(PropertyRepository dataSourceProperty, Executor executor) {
         this.dataSourceProperty = dataSourceProperty;
         this.executor = executor;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void createPropertyWithPhotos(Property property, List<Photo> photos){
         executor.execute(()-> {
             this.dataSourceProperty.createPropertyWithPhotos(property, photos);

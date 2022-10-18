@@ -41,9 +41,10 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback {
 
+    private boolean isTablet;
+    private Context mContext;
     private FragmentItemDetailBinding binding;
     private PropertyViewModel propertyViewModel;
-    private View itemDetailFragmentContainer;
 
     private ItemDetailFragmentDirections.ActionItemDetailFragmentToCreateUpdateContainer action;
 
@@ -53,7 +54,7 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
 
     private GoogleMap mMap;
     private SupportMapFragment mapFragment;
-    private static final int DEFAULT_ZOOM = 16;
+    private static final int DEFAULT_ZOOM = 17;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -70,17 +71,21 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
             propertyId = Long.parseLong(getArguments().getString(PROPERTY_ID_DETAILS));
         }
         configureViewModel();
+    }
 
-
+    // Initialise it from onAttach()
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        isTablet = getContext().getResources().getBoolean(R.bool.isTablet);
         binding = FragmentItemDetailBinding.inflate(inflater, container, false);
         View rootView = binding.getRoot();
-        itemDetailFragmentContainer = rootView.findViewById(R.id.item_detail_nav_container);
         return rootView;
     }
 
@@ -122,9 +127,11 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
             public void onChanged(PropertyWithPhoto property) {
                 propertyWithPhoto = property;
                 initView();
-                LatLng propertyPosition = getLocationFromAddress(getActivity(),getAddress());
-                mMap.addMarker(new MarkerOptions().position(propertyPosition).title("Property Position"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(propertyPosition, DEFAULT_ZOOM));
+                LatLng propertyPosition = getLocationFromAddress(mContext, getAddress());
+                if (propertyPosition != null) {
+                    mMap.addMarker(new MarkerOptions().position(propertyPosition).title("Property Position"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(propertyPosition, DEFAULT_ZOOM));
+                }
             }
         };
         propertyViewModel.getProperty(propertyId).observe(getActivity(), propertyWithPhotoObserver);
@@ -147,9 +154,9 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
 
     }
 
-    public String getAddress(){
-        String address = propertyWithPhoto.property.getAddress().getStreet() +" "+
-                propertyWithPhoto.property.getAddress().getPostCode()+" "+
+    public String getAddress() {
+        String address = propertyWithPhoto.property.getAddress().getStreet() + " " +
+                propertyWithPhoto.property.getAddress().getPostCode() + " " +
                 propertyWithPhoto.property.getAddress().getCity();
 
         return address;
@@ -158,63 +165,50 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-        //LatLng propertyPosition = getLocationFromAddress(getActivity(),getAddress());
-        // Add a marker in Sydney and move the camera
-        //mMap.addMarker(new MarkerOptions().position(propertyPosition).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(propertyPosition));
-       /* LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
 
     public LatLng getLocationFromAddress(Context context, String strAddress) {
-        Geocoder coder = new Geocoder(context);
-        List<Address> address;
-        LatLng p1 = null;
+        if (strAddress != "null 0 null") {
+            Geocoder coder = new Geocoder(context);
+            List<Address> address;
+            LatLng p1 = null;
 
-        try {
-            address = coder.getFromLocationName(strAddress, 5);
-            if (address == null) {
-                return null;
+            try {
+                address = coder.getFromLocationName(strAddress, 5);
+                if (address == null) {
+                    return null;
+                }
+                Address location = address.get(0);
+                location.getLatitude();
+                location.getLongitude();
+
+                p1 = new LatLng(location.getLatitude(), location.getLongitude());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            Address location = address.get(0);
-            location.getLatitude();
-            location.getLongitude();
-
-            p1 = new LatLng(location.getLatitude(), location.getLongitude());
-        } catch (Exception e) {
-            e.printStackTrace();
+            return p1;
         }
-        return p1;
+        return null;
     }
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        if (itemDetailFragmentContainer == null) {
+        if (!isTablet) {
             inflater.inflate(R.menu.menu_details, menu);
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (itemDetailFragmentContainer == null) {
+        if (!isTablet) {
             switch (item.getItemId()) {
                 case R.id.update:
                     Toast.makeText(getActivity(), "Update mobile...", Toast.LENGTH_LONG).show();
-
                     Bundle arguments = new Bundle();
                     arguments.putString(PROPERTY_ID_DETAILS, Long.toString(propertyId));
-
-                    if (itemDetailFragmentContainer != null) {
-                    /*action = ItemDetailFragmentDirections.actionItemDetailFragmentToCreateUpdateContainer();
-                    action.setPropertyId(Long.toString(propertyId));
-                    Navigation.findNavController(getActivity(), R.id.fragment_item_detail).navigate(action);*/
-                        Navigation.findNavController(itemDetailFragmentContainer)
-                                .navigate(R.id.fragment_item_detail, arguments);
-                    } else {
-                        action = ItemDetailFragmentDirections.actionItemDetailFragmentToCreateUpdateContainer();
-                        action.setPropertyIdCreateUpdate(Long.toString(propertyId));
-                        Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail).navigate(action);
-                    }
+                    action = ItemDetailFragmentDirections.actionItemDetailFragmentToCreateUpdateContainer();
+                    action.setPropertyIdCreateUpdate(Long.toString(propertyId));
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail).navigate(action);
                     return true;
                 default:
                     return super.onOptionsItemSelected(item);

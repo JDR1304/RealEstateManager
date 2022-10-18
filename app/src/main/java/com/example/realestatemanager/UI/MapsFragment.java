@@ -37,6 +37,7 @@ import java.util.List;
 
 public class MapsFragment extends Fragment {
 
+    private Context mContext;
     private GoogleMap mMap;
     private static final int DEFAULT_ZOOM = 16;
     private PropertyViewModel propertyViewModel;
@@ -64,6 +65,13 @@ public class MapsFragment extends Fragment {
             //googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         }
     };
+
+    // Initialise it from onAttach()
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
 
     @Nullable
     @Override
@@ -100,22 +108,24 @@ public class MapsFragment extends Fragment {
                 propertyWithPhotoList.clear();
                 for (int i = 0; i < propertyWithPhotos.size(); i++) {
                     propertyWithPhotoList.add(propertyWithPhotos.get(i));
-                    LatLng propertyPosition = getLocationFromAddress(getActivity(), getAddress(propertyWithPhotos.get(i)));
-                    mMap.addMarker(new MarkerOptions().position(propertyPosition).title(Long.toString(propertyWithPhotos.get(i).property.getId())));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(propertyPosition, DEFAULT_ZOOM));
+                    LatLng propertyPosition = getLocationFromAddress(mContext, getAddress(propertyWithPhotos.get(i)));
+                    if (propertyPosition != null) {
+                        mMap.addMarker(new MarkerOptions().position(propertyPosition).title(Long.toString(propertyWithPhotos.get(i).property.getId())));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(propertyPosition, DEFAULT_ZOOM));
+                    }
                 }
                 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(@NonNull Marker marker) {
-                            for (int i = 0; i < propertyWithPhotos.size(); i++) {
-                                if ((propertyWithPhotos.get(i).property.getId()) == (Long.parseLong(marker.getTitle()))) {
-                                    property_id = propertyWithPhotos.get(i).property.getId();
-                                }
+                        for (int i = 0; i < propertyWithPhotos.size(); i++) {
+                            if ((propertyWithPhotos.get(i).property.getId()) == (Long.parseLong(marker.getTitle()))) {
+                                property_id = propertyWithPhotos.get(i).property.getId();
                             }
+                        }
                         Bundle arguments = new Bundle();
                         arguments.putString(PROPERTY_ID_DETAILS, Long.toString(property_id));
-                            Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
-                                    .navigate(R.id.action_mapsFragment_to_item_detail_fragment, arguments);
+                        Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
+                                .navigate(R.id.action_mapsFragment_to_item_detail_fragment, arguments);
 
                         return false;
                     }
@@ -128,29 +138,32 @@ public class MapsFragment extends Fragment {
     }
 
     public LatLng getLocationFromAddress(Context context, String strAddress) {
-        Geocoder coder = new Geocoder(context);
-        List<Address> address;
-        LatLng p1 = null;
+        if (strAddress != "null 0 null") {
+            Geocoder coder = new Geocoder(context);
+            List<Address> address;
+            LatLng p1 = null;
 
-        try {
-            address = coder.getFromLocationName(strAddress, 5);
-            if (address == null) {
-                return null;
+            try {
+                address = coder.getFromLocationName(strAddress, 5);
+                if (address == null) {
+                    return null;
+                }
+                Address location = address.get(0);
+                location.getLatitude();
+                location.getLongitude();
+
+                p1 = new LatLng(location.getLatitude(), location.getLongitude());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            Address location = address.get(0);
-            location.getLatitude();
-            location.getLongitude();
-
-            p1 = new LatLng(location.getLatitude(), location.getLongitude());
-        } catch (Exception e) {
-            e.printStackTrace();
+            return p1;
         }
-        return p1;
+        return null;
     }
 
-    public String getAddress(PropertyWithPhoto propertyWithPhoto){
-        String address = propertyWithPhoto.property.getAddress().getStreet() +" "+
-                propertyWithPhoto.property.getAddress().getPostCode()+" "+
+    public String getAddress(PropertyWithPhoto propertyWithPhoto) {
+        String address = propertyWithPhoto.property.getAddress().getStreet() + " " +
+                propertyWithPhoto.property.getAddress().getPostCode() + " " +
                 propertyWithPhoto.property.getAddress().getCity();
 
         return address;

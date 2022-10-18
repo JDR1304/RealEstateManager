@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.realestatemanager.UI.MapsFragment"
-        android:label="fragment_maps"
+        android:label="Properties map"
         tools:layout="@layout/fragment_maps" >
         <action
             android:id="@+id/action_mapsFragment_to_item_detail_fragment"

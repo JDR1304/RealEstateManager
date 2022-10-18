@@ -11,9 +11,28 @@
         android:name="com.example.realestatemanager.UI.ItemDetailFragment"
         android:label="@string/title_item_detail">
         <argument
-            android:name="property_id"
+            android:name="property_id_details"
             android:defaultValue="1"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.realestatemanager.UI.MapsFragment"
+        android:label="Properties map"
+        tools:layout="@layout/fragment_maps" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/create_update_container"
+        android:name="com.example.realestatemanager.UI.CreateAndUpdatePropertyFragment"
+        android:label="@string/update_property"
+        tools:layout="@layout/fragment_create_and_update_property">
+        <argument
+            android:name="property_id_create_update"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
 </navigation>

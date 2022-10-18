@@ -4,10 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,8 +22,6 @@ import android.widget.Toast;
 import com.example.realestatemanager.PropertyViewModel;
 import com.example.realestatemanager.R;
 import com.example.realestatemanager.RetrieveIdPropertyId;
-import com.example.realestatemanager.UI.CreateAndUpdatePropertyFragment;
-import com.example.realestatemanager.UI.ItemDetailFragmentDirections;
 import com.example.realestatemanager.databinding.FragmentItemListBinding;
 import com.example.realestatemanager.injection.Injection;
 import com.example.realestatemanager.injection.ViewModelFactory;
@@ -37,6 +34,7 @@ import androidx.lifecycle.Observer;
 
 public class ItemListFragment extends Fragment {
 
+    private Boolean isTablet;
     private FragmentItemListBinding binding;
     private RecyclerView recyclerView;
     private PropertyViewModel propertyViewModel;
@@ -46,8 +44,12 @@ public class ItemListFragment extends Fragment {
     private ItemListFragmentDirections.ActionItemListFragmentToCreateUpdateContainer actionCreate;
 
 
-    private String PROPERTY_ID_DETAILS = "property_id_details";
+    private final String PROPERTY_ID_DETAILS = "property_id_details";
+    private final String PROPERTY_ID_CREATE_UPDATE = "property_id_create_update";
+    private String propertyUId;
     private View itemDetailFragmentContainer;
+
+    NavHostFragment navHostFragment;
 
 
     public ItemListFragment() {
@@ -63,7 +65,7 @@ public class ItemListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        isTablet = getContext().getResources().getBoolean(R.bool.isTablet);
         binding = FragmentItemListBinding.inflate(inflater, container, false);
         recyclerView = binding.itemList;
         View view = binding.getRoot();
@@ -71,8 +73,15 @@ public class ItemListFragment extends Fragment {
         // Leaving this not using view binding as it relies on if the view is visible the current
         // layout configuration (layout, layout-sw600dp)
         itemDetailFragmentContainer = view.findViewById(R.id.item_detail_nav_container);
+        //setTabletOrMobile();
         return view;
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navHostFragment = (NavHostFragment) getChildFragmentManager().findFragmentById(R.id.item_detail_nav_container);
     }
 
     @Override
@@ -102,14 +111,12 @@ public class ItemListFragment extends Fragment {
                 listViewRecyclerViewAdapter = new ListViewRecyclerViewAdapter(propertyWithPhotoList, propertyViewModel, new RetrieveIdPropertyId() {
                     @Override
                     public void onClickItem(String propertyId) {
-                        //Bundle arguments = new Bundle();
-                        //arguments.putString(PROPERTY_ID, propertyId);
-                        if (itemDetailFragmentContainer != null) {
-                            /*action = ItemListFragmentDirections.showItemDetail();
-                            action.setPropertyId(propertyId);
-                            Navigation.findNavController(getActivity(), R.id.fragment_item_detail).navigate(action);*/
-                            //Navigation.findNavController(itemDetailFragmentContainer)
-                                    //.navigate(R.id.fragment_item_detail, arguments);
+                        propertyUId = propertyId;
+                        Bundle arguments = new Bundle();
+                        arguments.putString(PROPERTY_ID_DETAILS, propertyId);
+                        if (isTablet) {
+                            Navigation.findNavController(itemDetailFragmentContainer)
+                                    .navigate(R.id.fragment_item_detail, arguments);
                         } else {
                             action = ItemListFragmentDirections.showItemDetail();
                             action.setPropertyIdDetails(propertyId);
@@ -133,43 +140,35 @@ public class ItemListFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        if (itemDetailFragmentContainer == null) {
-            inflater.inflate(R.menu.menu_list, menu);
-        } else {
+        if (isTablet) {
             inflater.inflate(R.menu.whole_menu, menu);
+        } else {
+            inflater.inflate(R.menu.menu_list, menu);
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (itemDetailFragmentContainer == null) {
-            switch (item.getItemId()) {
-                case R.id.map:
-                    Toast.makeText(getActivity(), "COUCOU List ...", Toast.LENGTH_LONG).show();
-                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail).navigate(R.id.action_item_list_fragment_to_mapsFragment);
-                    return true;
-                case R.id.add:
-                    Toast.makeText(getActivity(), "Add List...", Toast.LENGTH_LONG).show();
-                    actionCreate = ItemListFragmentDirections.actionItemListFragmentToCreateUpdateContainer();
-                    actionCreate.setPropertyIdCreateUpdate(null);
-                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail).navigate(actionCreate);
-                    return true;
-                case R.id.search:
-                    Toast.makeText(getActivity(), "Search List...", Toast.LENGTH_LONG).show();
-                    return true;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-        } else {
+        if (isTablet) {
             switch (item.getItemId()) {
                 case R.id.map:
                     Toast.makeText(getActivity(), "COUCOU List tablet ...", Toast.LENGTH_LONG).show();
+                    //Ajout 3 sur 3 17/10/2022
+                    navHostFragment.getNavController().navigate(R.id.mapsFragment);
+                    //Navigation.findNavController(itemDetailFragmentContainer)
+                       //.navigate(R.id.action_item_list_fragment_to_mapsFragment);
                     return true;
                 case R.id.add:
                     Toast.makeText(getActivity(), "Add List tablet...", Toast.LENGTH_LONG).show();
+                    navHostFragment.getNavController().navigate(R.id.create_update_container);
+                    //Navigation.findNavController(itemDetailFragmentContainer)
+                    //       .navigate(R.id.action_item_detail_fragment_to_create_update_container);
                     return true;
-                case R.id.update:
-                    Toast.makeText(getActivity(), "Update List tablet...", Toast.LENGTH_LONG).show();
+               case R.id.update:
+                    Bundle arguments = new Bundle();
+                    arguments.putString(PROPERTY_ID_CREATE_UPDATE, propertyUId);
+                    Toast.makeText(getActivity(), "Update 1 List tablet...", Toast.LENGTH_LONG).show();
+                    navHostFragment.getNavController().navigate(R.id.create_update_container, arguments);
                     return true;
                 case R.id.search:
                     Toast.makeText(getActivity(), "Search List tablet...", Toast.LENGTH_LONG).show();
@@ -177,6 +176,28 @@ public class ItemListFragment extends Fragment {
                 default:
                     return super.onOptionsItemSelected(item);
             }
+
+        } else {
+            switch (item.getItemId()) {
+                case R.id.map:
+                    Toast.makeText(getActivity(), "COUCOU List ...", Toast.LENGTH_LONG).show();
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
+                            .navigate(R.id.action_item_list_fragment_to_mapsFragment);
+                    return true;
+                case R.id.add:
+                    Toast.makeText(getActivity(), "Add List...", Toast.LENGTH_LONG).show();
+                    actionCreate = ItemListFragmentDirections.actionItemListFragmentToCreateUpdateContainer();
+                    actionCreate.setPropertyIdCreateUpdate(null);
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
+                            .navigate(actionCreate);
+                    return true;
+                case R.id.search:
+                    Toast.makeText(getActivity(), "Search List...", Toast.LENGTH_LONG).show();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
     }
+
 }

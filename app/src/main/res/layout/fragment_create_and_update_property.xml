@@ -417,6 +417,17 @@
                 app:layout_constraintStart_toEndOf="@+id/agent_name_value"
                 app:layout_constraintTop_toBottomOf="@+id/chek_box_school"/>
 
+            <Button
+                android:id="@+id/create_or_update_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Create or update"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/check_box_status" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
