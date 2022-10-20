@@ -17,6 +17,7 @@ import com.example.realestatemanager.RetrieveIdPropertyId;
 import com.example.realestatemanager.models.PropertyWithPhoto;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListViewRecyclerViewAdapter extends RecyclerView.Adapter<ListViewRecyclerViewAdapter.ViewHolder> {
@@ -25,6 +26,7 @@ public class ListViewRecyclerViewAdapter extends RecyclerView.Adapter<ListViewRe
     private List<PropertyWithPhoto> propertyWithPhotoList;
     private PropertyViewModel propertyViewModel;
     private RetrieveIdPropertyId listener;
+    private List <View> listView = new ArrayList<>();
 
 
     public ListViewRecyclerViewAdapter(List<PropertyWithPhoto> propertyWithPhotoList, PropertyViewModel propertyViewModel, RetrieveIdPropertyId listener) {
@@ -38,6 +40,7 @@ public class ListViewRecyclerViewAdapter extends RecyclerView.Adapter<ListViewRe
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_list_content, parent, false);
+        listView.add(view);
         return new ViewHolder(view);
     }
 
@@ -60,7 +63,15 @@ public class ListViewRecyclerViewAdapter extends RecyclerView.Adapter<ListViewRe
         }
         holder.itemView.setOnClickListener(v -> {
             listener.onClickItem(Long.toString(propertyWithPhoto.property.getId()));
-
+            for (View item: listView) {
+                if(listView.get(holder.getAdapterPosition()) == item) {
+                    item.setBackgroundColor(0xFF8CF1EC);
+                }
+                else{
+                    item.setBackgroundColor(0xFFFFFFFF);
+                }
+            };
+            //holder.itemView.setBackgroundColor(0xFFBB86FC)
         });
     }
 
