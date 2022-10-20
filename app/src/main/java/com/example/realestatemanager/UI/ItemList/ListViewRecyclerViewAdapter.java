@@ -1,5 +1,6 @@
 package com.example.realestatemanager.UI.ItemList;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +47,17 @@ public class ListViewRecyclerViewAdapter extends RecyclerView.Adapter<ListViewRe
         holder.type.setText(propertyWithPhoto.property.getPropertyType());
         holder.town.setText(propertyWithPhoto.property.getAddress().getCity());
         holder.price.setText(displayPrice(propertyWithPhoto.property.getPriceInDollars()));
-        Glide.with(holder.propertyImage.getContext())
-                .load(R.drawable.ic_baseline_apartment_24)
-                .into(holder.propertyImage);
+        if (propertyWithPhoto.photos.size()==0) {
+            Glide.with(holder.propertyImage.getContext())
+                    .load(R.drawable.ic_baseline_apartment_24)
+                    .into(holder.propertyImage);
+        } else{
+            Glide.with(holder.propertyImage.getContext())
+                    .load(Uri.parse(propertyWithPhoto.photos.get(0).getStringPhoto()))
+                    .override(100,100)
+                    .error(R.drawable.ic_baseline_apartment_24)
+                    .into(holder.propertyImage);
+        }
         holder.itemView.setOnClickListener(v -> {
             listener.onClickItem(Long.toString(propertyWithPhoto.property.getId()));
 

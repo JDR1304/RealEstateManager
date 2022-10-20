@@ -85,17 +85,7 @@ public abstract class RealEstateManagerDataBase extends RoomDatabase {
                 contentValuesProperty2.put("city", "Lambesc");
                 db.insert("Property", OnConflictStrategy.IGNORE, contentValuesProperty2);
 
-                ContentValues contentValuesPhoto = new ContentValues();
-                contentValuesPhoto.put("propertyId", 1);
-                contentValuesPhoto.put("name", "Photo name 1");
-                contentValuesPhoto.put("stringPhoto", "URI photo 1");
-                db.insert("Photo", OnConflictStrategy.IGNORE, contentValuesPhoto);
 
-                ContentValues contentValuesPhoto2 = new ContentValues();
-                contentValuesPhoto2.put("propertyId", 1);
-                contentValuesPhoto2.put("name", "Photo name 2");
-                contentValuesPhoto2.put("stringPhoto", "URI photo 2");
-                db.insert("Photo", OnConflictStrategy.IGNORE, contentValuesPhoto2);
             }
         };
     }

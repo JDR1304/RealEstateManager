@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/item_detail_fragment"
-        android:name="com.example.realestatemanager.UI.ItemDetailFragment"
+        android:name="com.example.realestatemanager.UI.ItemDetail.ItemDetailFragment"
         android:label="@string/title_item_detail"
         tools:layout="@layout/fragment_item_detail">
         <argument

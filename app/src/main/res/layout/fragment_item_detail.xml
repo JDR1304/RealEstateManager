@@ -32,16 +32,16 @@
                 android:paddingBottom="8dp"
                 android:text="Media"
                 android:textStyle="bold"
+                android:textColor="@color/teal_700"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-
-                tools:context="com.example.realestatemanager.UI.ItemDetailFragment" />
+                tools:context="com.example.realestatemanager.UI.ItemDetail.ItemDetailFragment" />
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/item_photo"
-                android:name="com.example.realestatemanager.ItemListFragment"
+                android:name="com.example.realestatemanager.ItemDetailFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -50,7 +50,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/media"
                 tools:context="com.example.realestatemanager.UI.MainActivity"
-                tools:listitem="@layout/item_list_content" />
+                tools:listitem="@layout/photo_item" />
 
             <TextView
                 android:id="@+id/description"
@@ -63,10 +63,11 @@
                 android:text="Description"
                 android:textIsSelectable="true"
                 android:textStyle="bold"
+                android:textColor="@color/teal_700"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_photo"
-                tools:context="com.example.realestatemanager.UI.ItemDetailFragment" />
+                tools:context="com.example.realestatemanager.UI.ItemDetail.ItemDetailFragment" />
 
             <TextView
                 android:id="@+id/property_description"
@@ -87,6 +88,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
+                app:tint="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/property_description"
                 app:srcCompat="@drawable/ic_baseline_settings_overscan_24" />
@@ -99,6 +101,8 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
+                android:textStyle="bold"
+                android:textColor="@color/teal_200"
                 android:text="Surface"
                 app:layout_constraintEnd_toStartOf="@+id/surface_value"
                 app:layout_constraintStart_toEndOf="@+id/image_view_surface"
@@ -122,6 +126,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
+                app:tint="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_view_surface"
                 app:srcCompat="@drawable/ic_baseline_home_24" />
@@ -131,6 +136,8 @@
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/teal_200"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -155,6 +162,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
+                app:tint="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_view_home"
                 app:srcCompat="@drawable/ic_baseline_bathtub_24" />
@@ -164,6 +172,8 @@
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/teal_200"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -188,6 +198,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
+                app:tint="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Image_view_bathrooms"
                 app:srcCompat="@drawable/ic_baseline_airline_seat_individual_suite_24" />
@@ -197,6 +208,8 @@
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/teal_200"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -221,6 +234,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
+                app:tint="@color/teal_700"
                 app:layout_constraintBottom_toBottomOf="@+id/city"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Image_view_bedrooms"

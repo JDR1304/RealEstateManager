@@ -45,4 +45,10 @@ public class PropertyViewModel extends ViewModel {
     public LiveData <List<PropertyWithPhoto>> getProperties(){
         return this.dataSourceProperty.getProperties();
     }
+
+    public void deleteById(long id){
+        executor.execute(()-> {
+        this.dataSourceProperty.deleteById(id);
+        });
+    }
 }

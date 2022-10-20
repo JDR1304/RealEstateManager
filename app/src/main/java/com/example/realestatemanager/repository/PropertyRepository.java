@@ -30,7 +30,7 @@ public class PropertyRepository {
 
     public void updatePropertyWithPhotos(Property property, List <Photo> photos){
         this.propertyDAO.updateProperty(property);
-        this.propertyDAO.updatePhotos(photos);
+        this.propertyDAO.createPhotos(photos);
     }
 
 
@@ -43,4 +43,7 @@ public class PropertyRepository {
         return this.propertyDAO.getProperties();
     }
 
+    public void deleteById(long id){
+         this.propertyDAO.deleteById(id);
+    }
 }

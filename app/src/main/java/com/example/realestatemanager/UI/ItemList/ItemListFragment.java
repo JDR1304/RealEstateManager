@@ -153,16 +153,11 @@ public class ItemListFragment extends Fragment {
             switch (item.getItemId()) {
                 case R.id.map:
                     Toast.makeText(getActivity(), "COUCOU List tablet ...", Toast.LENGTH_LONG).show();
-                    //Ajout 3 sur 3 17/10/2022
                     navHostFragment.getNavController().navigate(R.id.mapsFragment);
-                    //Navigation.findNavController(itemDetailFragmentContainer)
-                       //.navigate(R.id.action_item_list_fragment_to_mapsFragment);
                     return true;
                 case R.id.add:
                     Toast.makeText(getActivity(), "Add List tablet...", Toast.LENGTH_LONG).show();
                     navHostFragment.getNavController().navigate(R.id.create_update_container);
-                    //Navigation.findNavController(itemDetailFragmentContainer)
-                    //       .navigate(R.id.action_item_detail_fragment_to_create_update_container);
                     return true;
                case R.id.update:
                     Bundle arguments = new Bundle();

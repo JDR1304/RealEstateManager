@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageProperty"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_margin="8dp"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -21,27 +21,31 @@
 
         <TextView
             android:id="@+id/type"
-            style="?android:attr/textAppearanceSmall"
+            style="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/teal_700"
             android:textStyle="bold"
             android:layout_margin="@dimen/container_margin"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
             android:id="@+id/town"
-            style="?android:attr/textAppearanceSmall"
+            style="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/teal_200"
             android:layout_margin="@dimen/container_margin"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
             android:id="@+id/price"
-            style="?android:attr/textAppearanceSmall"
+            style="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#E91E63"
+            android:textStyle="bold"
+            android:textColor="@color/teal_700"
             android:layout_margin="@dimen/container_margin"
             android:textAppearance="?attr/textAppearanceListItem" />
     </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.realestatemanager.UI;
+package com.example.realestatemanager.UI.ItemDetail;
 
 
 import androidx.annotation.NonNull;
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.location.Address;
@@ -45,6 +47,8 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
     private Context mContext;
     private FragmentItemDetailBinding binding;
     private PropertyViewModel propertyViewModel;
+    private ItemDetailCreateUpdateRecyclerViewAdapter itemDetailRecyclerViewAdapter;
+    private RecyclerView recyclerView;
 
     private ItemDetailFragmentDirections.ActionItemDetailFragmentToCreateUpdateContainer action;
 
@@ -92,6 +96,7 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        recyclerView = binding.itemPhoto;
         mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -126,12 +131,15 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
             @Override
             public void onChanged(PropertyWithPhoto property) {
                 propertyWithPhoto = property;
+                itemDetailRecyclerViewAdapter = new ItemDetailCreateUpdateRecyclerViewAdapter(propertyWithPhoto.photos, propertyViewModel, false);
                 initView();
                 LatLng propertyPosition = getLocationFromAddress(mContext, getAddress());
                 if (propertyPosition != null) {
                     mMap.addMarker(new MarkerOptions().position(propertyPosition).title("Property Position"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(propertyPosition, DEFAULT_ZOOM));
                 }
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                recyclerView.setAdapter(itemDetailRecyclerViewAdapter);
             }
         };
         propertyViewModel.getProperty(propertyId).observe(getActivity(), propertyWithPhotoObserver);
