@@ -2,6 +2,7 @@ package com.example.realestatemanager.injection;
 
 import android.content.Context;
 
+import com.example.realestatemanager.database.PropertyDAO;
 import com.example.realestatemanager.database.RealEstateManagerDataBase;
 import com.example.realestatemanager.repository.PropertyRepository;
 
@@ -22,4 +23,5 @@ public class Injection {
         Executor executor = provideExecutor();
         return new ViewModelFactory(dataSourceProperty, executor);
     }
+
 }

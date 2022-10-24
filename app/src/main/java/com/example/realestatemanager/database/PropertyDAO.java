@@ -9,8 +9,10 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.RawQuery;
 import androidx.room.Transaction;
 import androidx.room.Update;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
 import com.example.realestatemanager.models.Photo;
 import com.example.realestatemanager.models.Property;
@@ -58,5 +60,8 @@ public abstract class PropertyDAO {
 
     @Query("DELETE FROM Photo WHERE id = :id")
     public abstract void deleteById(long id);
+
+    @RawQuery
+    public abstract LiveData <List<PropertyWithPhoto>> getPropertiesFiltered(SupportSQLiteQuery query);
 
 }

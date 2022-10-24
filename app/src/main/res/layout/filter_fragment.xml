@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/create_update_container"
+    android:id="@+id/filter_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UI.MainActivity"
@@ -27,31 +26,44 @@
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Property price"
-                android:textStyle="bold"
+                android:text="Price"
                 android:textColor="@color/teal_700"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:context="com.example.realestatemanager.UI.ItemDetail.ItemDetailFragment" />
 
             <EditText
-                android:id="@+id/property_price_value"
+                android:id="@+id/property_price_value_min"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:paddingStart="8dp"
+                android:layout_marginStart="16dp"
+                android:hint="Price min"
+                android:inputType="number"
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
-                android:inputType="number"
-                android:hint="Property price"
                 app:layout_constraintStart_toEndOf="@+id/property_price"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/property_price_value_max"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:hint="Price max"
+                android:inputType="number"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                app:layout_constraintStart_toEndOf="@+id/property_price_value_min"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/type"
@@ -63,8 +75,8 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="Property type"
-                android:textStyle="bold"
                 android:textColor="@color/teal_700"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/property_price"
                 tools:context="com.example.realestatemanager.UI.ItemDetail.ItemDetailFragment" />
@@ -76,9 +88,9 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:hint="Property type"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:hint="Property type"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/type"
                 app:layout_constraintTop_toBottomOf="@+id/property_price"
@@ -92,83 +104,27 @@
                 android:layout_marginTop="16dp"
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
+                android:paddingRight="8dp"
                 android:paddingBottom="8dp"
-                android:text="Media"
-                android:textStyle="bold"
+                android:text="Media numbers"
                 android:textColor="@color/teal_700"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/numbers_media_value"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/type"
                 tools:context="com.example.realestatemanager.UI.ItemDetail.ItemDetailFragment" />
 
-            <Button
-                android:id="@+id/add_media_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+            <NumberPicker
+                android:id="@+id/numbers_media_value"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="16dp"
-                android:text="Add Media"
-                android:paddingStart="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/item_photo"
+                android:layout_marginStart="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 app:layout_constraintStart_toEndOf="@+id/media"
                 app:layout_constraintTop_toBottomOf="@+id/spinner_property_type_value" />
-
-            <Button
-                android:id="@+id/take_picture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:paddingStart="8dp"
-                android:text="Take Picture"
-                app:layout_constraintBottom_toBottomOf="@+id/add_media_button"
-                app:layout_constraintStart_toEndOf="@+id/add_media_button" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/item_photo"
-                android:name="com.example.realestatemanager.ItemDetailFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal"
-                app:layoutManager="LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/media"
-                tools:context="com.example.realestatemanager.UI.MainActivity"
-                tools:listitem="@layout/photo_item" />
-
-            <TextView
-                android:id="@+id/description"
-                style="?android:attr/textAppearanceMedium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:paddingStart="8dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="Description"
-                android:textIsSelectable="true"
-                android:textStyle="bold"
-                android:textColor="@color/teal_700"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_photo"
-                tools:context="com.example.realestatemanager.UI.ItemDetail.ItemDetailFragment" />
-
-            <EditText
-                android:id="@+id/property_description"
-                style="?android:attr/textAppearanceMedium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:paddingStart="8dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="8dp"
-                android:text="Text description for the property"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description" />
 
             <ImageView
                 android:id="@+id/image_view_surface"
@@ -176,10 +132,10 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
                 android:paddingTop="8dp"
-                app:tint="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/property_description"
-                app:srcCompat="@drawable/ic_baseline_settings_overscan_24" />
+                app:layout_constraintTop_toBottomOf="@+id/numbers_media_value"
+                app:srcCompat="@drawable/ic_baseline_settings_overscan_24"
+                app:tint="@color/teal_700" />
 
             <TextView
                 android:id="@+id/surface"
@@ -191,93 +147,113 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="Surface"
-                android:textStyle="bold"
                 android:textColor="@color/teal_200"
-                app:layout_constraintEnd_toStartOf="@+id/surface_value"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/surface_value_min"
                 app:layout_constraintStart_toEndOf="@+id/image_view_surface"
-                app:layout_constraintTop_toBottomOf="@+id/property_description" />
+                app:layout_constraintTop_toBottomOf="@+id/numbers_media_value" />
 
             <EditText
-                android:id="@+id/surface_value"
+                android:id="@+id/surface_value_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:hint="Square meters"
-                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:hint="Square min"
                 android:inputType="number"
+                android:orientation="horizontal"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 app:layout_constraintStart_toEndOf="@+id/surface"
-                app:layout_constraintTop_toBottomOf="@+id/property_description" />
+                app:layout_constraintTop_toBottomOf="@+id/numbers_media_value" />
+
+            <EditText
+                android:id="@+id/surface_value_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:hint="Square max"
+                android:inputType="number"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                app:layout_constraintStart_toEndOf="@+id/surface_value_min"
+                app:layout_constraintTop_toBottomOf="@+id/numbers_media_value" />
 
             <ImageView
                 android:id="@+id/image_view_home"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:paddingTop="8dp"
-                app:tint="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_view_surface"
-                app:srcCompat="@drawable/ic_baseline_home_24" />
+                app:srcCompat="@drawable/ic_baseline_home_24"
+                app:tint="@color/teal_700" />
 
             <TextView
                 android:id="@+id/number_of_rooms"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:paddingStart="16dp"
-                android:layout_marginTop="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="Number of rooms"
-                android:textStyle="bold"
                 android:textColor="@color/teal_200"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/image_view_home"
                 app:layout_constraintTop_toBottomOf="@+id/surface" />
 
             <NumberPicker
                 android:id="@+id/number_of_rooms_value"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 app:layout_constraintEnd_toEndOf="@+id/number_of_bathrooms_value"
-                app:layout_constraintTop_toBottomOf="@+id/surface_value" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/number_of_rooms"
+                app:layout_constraintTop_toBottomOf="@+id/surface_value_min" />
 
             <ImageView
                 android:id="@+id/Image_view_bathrooms"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="43dp"
                 android:paddingTop="8dp"
-                android:layout_marginTop="16dp"
-                app:tint="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_view_home"
-                app:srcCompat="@drawable/ic_baseline_bathtub_24" />
+                app:srcCompat="@drawable/ic_baseline_bathtub_24"
+                app:tint="@color/teal_700" />
 
             <TextView
                 android:id="@+id/number_of_bathrooms"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="43dp"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="Number of bathrooms"
-                android:textStyle="bold"
                 android:textColor="@color/teal_200"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/Image_view_bathrooms"
                 app:layout_constraintTop_toBottomOf="@+id/number_of_rooms" />
 
             <NumberPicker
                 android:id="@+id/number_of_bathrooms_value"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 app:layout_constraintStart_toEndOf="@+id/number_of_bathrooms"
                 app:layout_constraintTop_toBottomOf="@+id/number_of_rooms_value" />
 
@@ -285,34 +261,36 @@
                 android:id="@+id/Image_view_bedrooms"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="43dp"
                 android:paddingTop="8dp"
-                android:layout_marginTop="16dp"
-                app:tint="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Image_view_bathrooms"
-                app:srcCompat="@drawable/ic_baseline_airline_seat_individual_suite_24" />
+                app:srcCompat="@drawable/ic_baseline_airline_seat_individual_suite_24"
+                app:tint="@color/teal_700" />
 
             <TextView
                 android:id="@+id/number_of_bedrooms"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="43dp"
                 android:paddingStart="16dp"
-                android:layout_marginTop="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="Number of bedrooms"
-                android:textStyle="bold"
                 android:textColor="@color/teal_200"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/Image_view_bedrooms"
                 app:layout_constraintTop_toBottomOf="@+id/number_of_bathrooms" />
 
             <NumberPicker
                 android:id="@+id/number_of_bedrooms_value"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="24dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:text="Nb value"
                 app:layout_constraintEnd_toEndOf="@+id/number_of_bathrooms_value"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -323,14 +301,15 @@
                 android:id="@+id/image_view_location"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:paddingTop="8dp"
-                app:tint="@color/teal_700"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/city"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Image_view_bedrooms"
-                app:srcCompat="@drawable/ic_baseline_location_on_24" />
+                app:srcCompat="@drawable/ic_baseline_location_on_24"
+                app:tint="@color/teal_700" />
 
-            <EditText
+            <!--EditText
                 android:id="@+id/street"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
@@ -350,10 +329,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:inputType="number"
                 android:hint="Post code"
                 app:layout_constraintStart_toEndOf="@+id/image_view_location"
-                app:layout_constraintTop_toBottomOf="@+id/street" />
+                app:layout_constraintTop_toBottomOf="@+id/street" /-->
 
             <EditText
                 android:id="@+id/city"
@@ -361,11 +339,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="2dp"
                 android:hint="City"
                 app:layout_constraintStart_toEndOf="@+id/image_view_location"
-                app:layout_constraintTop_toBottomOf="@+id/post_code" />
+                app:layout_constraintTop_toBottomOf="@+id/number_of_bedrooms" />
 
             <TextView
                 android:id="@+id/points_of_interest"
@@ -377,10 +355,10 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="Points of interest"
-                android:textStyle="bold"
                 android:textColor="@color/teal_700"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/city"/>
+                app:layout_constraintTop_toBottomOf="@+id/city" />
 
 
             <CheckBox
@@ -390,7 +368,7 @@
                 android:layout_marginStart="8dp"
                 android:text="School"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/points_of_interest"/>
+                app:layout_constraintTop_toBottomOf="@+id/points_of_interest" />
 
             <CheckBox
                 android:id="@+id/chek_box_park"
@@ -399,7 +377,7 @@
                 android:layout_marginStart="16dp"
                 android:text="Park"
                 app:layout_constraintStart_toEndOf="@+id/chek_box_school"
-                app:layout_constraintTop_toBottomOf="@+id/points_of_interest"/>
+                app:layout_constraintTop_toBottomOf="@+id/points_of_interest" />
 
             <CheckBox
                 android:id="@+id/chek_box_store"
@@ -408,33 +386,20 @@
                 android:layout_marginStart="16dp"
                 android:text="Store"
                 app:layout_constraintStart_toEndOf="@+id/chek_box_park"
-                app:layout_constraintTop_toBottomOf="@+id/points_of_interest"/>
+                app:layout_constraintTop_toBottomOf="@+id/points_of_interest" />
 
             <TextView
-                android:id="@+id/agent_name"
+                android:id="@+id/sold_filter"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Agent name"
-                android:textStyle="bold"
+                android:text="Sold"
                 android:textColor="@color/teal_700"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chek_box_school"/>
-
-            <EditText
-                android:id="@+id/agent_name_value"
-                style="?android:attr/textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:hint="Agent name"
-                app:layout_constraintStart_toEndOf="@+id/agent_name"
                 app:layout_constraintTop_toBottomOf="@+id/chek_box_school" />
 
             <CheckBox
@@ -442,22 +407,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:text="Sold"
-                app:layout_constraintStart_toEndOf="@+id/agent_name_value"
-                app:layout_constraintTop_toBottomOf="@+id/chek_box_school"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sold_filter" />
 
             <Button
-                android:id="@+id/create_or_update_button"
+                android:id="@+id/search_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Create or update"
                 android:padding="16dp"
+                android:text="Search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/check_box_status" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

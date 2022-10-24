@@ -517,7 +517,8 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Add Picture ...", Toast.LENGTH_LONG).show();
-                Intent galleryPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent galleryPhotoIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                galleryPhotoIntent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(galleryPhotoIntent, GALLERY_IMAGE_CAPTURE);
             }
         });

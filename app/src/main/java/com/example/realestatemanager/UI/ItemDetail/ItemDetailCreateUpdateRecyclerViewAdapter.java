@@ -1,10 +1,10 @@
 package com.example.realestatemanager.UI.ItemDetail;
 
+
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,7 +21,7 @@ import java.util.List;
 public class ItemDetailCreateUpdateRecyclerViewAdapter extends RecyclerView.Adapter<ItemDetailCreateUpdateRecyclerViewAdapter.ViewHolder> {
 
     private List <Photo> photos;
-    private Button buttonDeletePicture;
+    private ImageView DeletePicture;
     private PropertyViewModel propertyViewModel;
     private boolean buttonDeletePictureVisible;
 
@@ -44,7 +44,7 @@ public class ItemDetailCreateUpdateRecyclerViewAdapter extends RecyclerView.Adap
         Photo photo = photos.get(position);
         holder.image.setImageURI(Uri.parse(photo.getStringPhoto()));
         if (buttonDeletePictureVisible) {
-            buttonDeletePicture.setOnClickListener(new View.OnClickListener() {
+            DeletePicture.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "Delete Picture", Toast.LENGTH_LONG).show();
@@ -64,14 +64,15 @@ public class ItemDetailCreateUpdateRecyclerViewAdapter extends RecyclerView.Adap
         private ImageView image;
 
 
+
         public ViewHolder(View view) {
             super(view);
             image = view.findViewById(R.id.image);
-            buttonDeletePicture = view.findViewById(R.id.button_delete_picture);
+            DeletePicture = view.findViewById(R.id.image_delete);
             if (buttonDeletePictureVisible) {
-                buttonDeletePicture.setVisibility(View.VISIBLE);
+                DeletePicture.setVisibility(View.VISIBLE);
             } else {
-                buttonDeletePicture.setVisibility(View.GONE);
+                DeletePicture.setVisibility(View.GONE);
             }
 
         }

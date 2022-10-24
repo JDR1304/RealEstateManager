@@ -44,6 +44,7 @@ public class ItemListFragment extends Fragment {
     private ItemListFragmentDirections.ActionItemListFragmentToCreateUpdateContainer actionCreate;
 
 
+
     private final String PROPERTY_ID_DETAILS = "property_id_details";
     private final String PROPERTY_ID_CREATE_UPDATE = "property_id_create_update";
     private String propertyUId;
@@ -167,6 +168,7 @@ public class ItemListFragment extends Fragment {
                     return true;
                 case R.id.search:
                     Toast.makeText(getActivity(), "Search List tablet...", Toast.LENGTH_LONG).show();
+                    navHostFragment.getNavController().navigate(R.id.filterFragment);
                     return true;
                 default:
                     return super.onOptionsItemSelected(item);
@@ -188,6 +190,8 @@ public class ItemListFragment extends Fragment {
                     return true;
                 case R.id.search:
                     Toast.makeText(getActivity(), "Search List...", Toast.LENGTH_LONG).show();
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
+                            .navigate(R.id.action_item_list_fragment_to_filterFragment);
                     return true;
                 default:
                     return super.onOptionsItemSelected(item);

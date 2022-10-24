@@ -35,4 +35,11 @@
             app:nullable="true" />
     </fragment>
 
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.example.realestatemanager.UI.FilterFragment"
+        android:label="Filters"
+        tools:layout="@layout/filter_fragment" >
+    </fragment>
+
 </navigation>
