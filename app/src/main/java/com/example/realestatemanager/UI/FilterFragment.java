@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.realestatemanager.PropertyViewModel;
@@ -35,7 +36,7 @@ import java.util.List;
 public class FilterFragment extends Fragment {
 
     private FilterFragmentBinding binding;
-
+    private Boolean isTablet;
     private String propertyTypeListenerValue;
     private double priceInDollarsListenerValueMin;
     private double priceInDollarsListenerValueMax;
@@ -56,7 +57,7 @@ public class FilterFragment extends Fragment {
     private NumberPicker numberPickerRooms;
     private NumberPicker numberPickerBathrooms;
     private NumberPicker numberPickerBedrooms;
-    private final String[] types = { "","House", "Apartment", "Penthouse", "Duplex"};
+    private final String[] types = {"", "House", "Apartment", "Penthouse", "Duplex"};
     private Button buttonSearch;
 
     private PropertiesFiltered propertiesFiltered;
@@ -77,6 +78,7 @@ public class FilterFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FilterFragmentBinding.inflate(inflater, container, false);
+        isTablet = getContext().getResources().getBoolean(R.bool.isTablet);
         View view = binding.getRoot();
         initPickers(view);
         initSpinner(view);
@@ -280,7 +282,6 @@ public class FilterFragment extends Fragment {
     }
 
 
-
     public void checkBoxListener() {
 
         binding.chekBoxSchool.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -313,7 +314,7 @@ public class FilterFragment extends Fragment {
 
     }
 
-    public void searchClickListener(){
+    public void searchClickListener() {
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -323,22 +324,17 @@ public class FilterFragment extends Fragment {
                         numberOfBedRoomsListenerValue, cityListenerValue, pointsOfInterestSchoolListenerValue,
                         pointsOfInterestParkListenerValue, pointsOfInterestStoreListenerValue, propertyStatusListenerValue);
 
-                getPropertiesFiltered(propertiesFiltered);
 
+                propertyViewModel.getListFiltered(propertiesFiltered);
+                if (isTablet){
+                    Navigation.findNavController(getActivity(), R.id.item_detail_nav_container)
+                            .navigate(R.id.recyclerViewFilterFragment);
 
-            }
-        });
-    }
-    public void getPropertiesFiltered(PropertiesFiltered propertiesFiltered){
-            listFiltered.clear();
-        Observer<List<PropertyWithPhoto>> results = new Observer<List<PropertyWithPhoto>>() {
-            @Override
-            public void onChanged(List<PropertyWithPhoto> propertyWithPhotos) {
-                for(int i = 0; i<propertyWithPhotos.size(); i++) {
-                    listFiltered.add(propertyWithPhotos.get(i));
+                } else {
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
+                            .navigate(R.id.action_filterFragment_to_recyclerViewFilterFragment);
                 }
             }
-        };
-        propertyViewModel.getListFiltered(propertiesFiltered).observe(this, results);
+        });
     }
 }

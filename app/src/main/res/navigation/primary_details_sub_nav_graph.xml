@@ -42,4 +42,11 @@
         tools:layout="@layout/filter_fragment" >
     </fragment>
 
+    <fragment
+        android:id="@+id/recyclerViewFilterFragment"
+        android:name="com.example.realestatemanager.UI.RecyclerViewFilterFragment"
+        android:label="Properties filtered"
+        tools:layout="@layout/fragment_recycler_view_filter" >
+    </fragment>
+
 </navigation>

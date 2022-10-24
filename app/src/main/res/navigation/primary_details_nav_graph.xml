@@ -68,6 +68,16 @@
         android:name="com.example.realestatemanager.UI.FilterFragment"
         android:label="Filters"
         tools:layout="@layout/filter_fragment" >
+        <action
+            android:id="@+id/action_filterFragment_to_recyclerViewFilterFragment"
+            app:destination="@id/recyclerViewFilterFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recyclerViewFilterFragment"
+        android:name="com.example.realestatemanager.UI.RecyclerViewFilterFragment"
+        android:label="Properties filtered"
+        tools:layout="@layout/fragment_recycler_view_filter" >
     </fragment>
 
 </navigation>

@@ -22,6 +22,7 @@ public class PropertyViewModel extends ViewModel {
 
     private PropertyRepository dataSourceProperty;
     private Executor executor;
+    private LiveData<List<PropertyWithPhoto>> listPropertyFiltered;
 
 
     public PropertyViewModel(PropertyRepository dataSourceProperty, Executor executor) {
@@ -56,9 +57,7 @@ public class PropertyViewModel extends ViewModel {
         });
     }
 
-    public LiveData<List<PropertyWithPhoto>> getListFiltered(PropertiesFiltered propertiesFiltered) {
-
-        LiveData<List<PropertyWithPhoto>> list;
+    public void getListFiltered(PropertiesFiltered propertiesFiltered) {
 
         // Query string
         String queryString = new String();
@@ -178,7 +177,7 @@ public class PropertyViewModel extends ViewModel {
             args.add(propertiesFiltered.getNumberOfBedRoomsValue());
         }
 
-        if (propertiesFiltered.getCityValue()!= null) {
+        if (propertiesFiltered.getCityValue()!= null && !propertiesFiltered.getCityValue().isEmpty() ) {
             if (containsCondition) {
                 queryString += " AND";
             } else {
@@ -242,11 +241,16 @@ public class PropertyViewModel extends ViewModel {
             args.add(value);
         }
 
-
         SimpleSQLiteQuery query = new SimpleSQLiteQuery(queryString, args.toArray());
-        SimpleSQLiteQuery q = new SimpleSQLiteQuery("SELECT * FROM PROPERTY WHERE pointsOfInterestSchool == 1");
-        return this.dataSourceProperty.getPropertiesFiltered(query);
+       // SimpleSQLiteQuery q = new SimpleSQLiteQuery("SELECT * FROM PROPERTY WHERE pointsOfInterestSchool == 1");
+        listPropertyFiltered = this.dataSourceProperty.getPropertiesFiltered(query);
+        //return listPropertyFiltered;
 
 
     }
+
+    public LiveData<List<PropertyWithPhoto>> getPropertyFiltered(){
+        return listPropertyFiltered;
+    }
+
 }
