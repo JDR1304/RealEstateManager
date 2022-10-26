@@ -9,7 +9,9 @@
     <fragment
         android:id="@+id/fragment_item_detail"
         android:name="com.example.realestatemanager.UI.ItemDetail.ItemDetailFragment"
-        android:label="@string/title_item_detail">
+        android:label="@string/title_item_detail"
+        tools:layout="@layout/fragment_item_detail"
+        >
         <argument
             android:name="property_id_details"
             android:defaultValue="1"

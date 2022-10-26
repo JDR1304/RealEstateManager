@@ -35,6 +35,7 @@ import androidx.lifecycle.Observer;
 public class ItemListFragment extends Fragment {
 
     private Boolean isTablet;
+    private Boolean firstConnexion = true;
     private FragmentItemListBinding binding;
     private RecyclerView recyclerView;
     private PropertyViewModel propertyViewModel;
@@ -50,7 +51,7 @@ public class ItemListFragment extends Fragment {
     private String propertyUId;
     private View itemDetailFragmentContainer;
 
-    NavHostFragment navHostFragment;
+    private NavHostFragment navHostFragment;
 
 
     public ItemListFragment() {
@@ -66,7 +67,12 @@ public class ItemListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //allow to have update of first property for the first connexion
         isTablet = getContext().getResources().getBoolean(R.bool.isTablet);
+        if (isTablet && firstConnexion){
+            propertyUId = "1";
+            firstConnexion = false;
+        }
         binding = FragmentItemListBinding.inflate(inflater, container, false);
         recyclerView = binding.itemList;
         View view = binding.getRoot();
@@ -170,6 +176,9 @@ public class ItemListFragment extends Fragment {
                     Toast.makeText(getActivity(), "Search List tablet...", Toast.LENGTH_LONG).show();
                     navHostFragment.getNavController().navigate(R.id.filterFragment);
                     return true;
+                case R.id.simulator:
+
+                    return true;
                 default:
                     return super.onOptionsItemSelected(item);
             }
@@ -192,6 +201,10 @@ public class ItemListFragment extends Fragment {
                     Toast.makeText(getActivity(), "Search List...", Toast.LENGTH_LONG).show();
                     Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
                             .navigate(R.id.action_item_list_fragment_to_filterFragment);
+                    return true;
+                case R.id.simulator:
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
+                            .navigate(R.id.action_item_list_fragment_to_loanSimulatorFragment);
                     return true;
                 default:
                     return super.onOptionsItemSelected(item);

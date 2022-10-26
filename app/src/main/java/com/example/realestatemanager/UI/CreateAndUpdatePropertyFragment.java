@@ -53,7 +53,6 @@ import java.util.List;
 
 public class CreateAndUpdatePropertyFragment extends Fragment {
 
-
     private FragmentCreateAndUpdatePropertyBinding binding;
     private PropertyWithPhoto propertyWithPhoto;
     private PropertyViewModel propertyViewModel;
@@ -107,6 +106,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         if (getArguments() != null && getArguments().getString(PROPERTY_ID_CREATE_UPDATE) != null) {
             propertyId = Long.parseLong(getArguments().getString(PROPERTY_ID_CREATE_UPDATE));
         }
+
         configureViewModel();
 
     }
@@ -505,8 +505,8 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
                         propertyWithPhoto.property.setPropertySaleDate(0);
                     }
                 } else {*/
-                    propertyStatusListenerValue = isChecked;
-               // }
+                propertyStatusListenerValue = isChecked;
+                // }
             }
         });
 

@@ -1,12 +1,16 @@
 package com.example.realestatemanager;
 
+
+
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
-
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -61,9 +65,11 @@ public class Utils {
     }
     */
 
+
     public static boolean isInternetAvailable(@NonNull Context context) {
 
-        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean isWifiConn = false;
         boolean isMobileConn = false;
 
@@ -71,13 +77,16 @@ public class Utils {
             NetworkInfo networkInfo = connMgr.getNetworkInfo(network);
             if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
                 isWifiConn |= networkInfo.isConnected();
+                Toast.makeText(context.getApplicationContext(), "Wifi connected", Toast.LENGTH_LONG).show();
             }
             if (networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
                 isMobileConn |= networkInfo.isConnected();
+                Toast.makeText(context.getApplicationContext(), "Mobile connected", Toast.LENGTH_LONG).show();
             }
             if (isWifiConn || isMobileConn) return true;
         }
+        Toast.makeText(context.getApplicationContext(), "Not connected", Toast.LENGTH_LONG).show();
         return false;
-    }
 
+    }
 }

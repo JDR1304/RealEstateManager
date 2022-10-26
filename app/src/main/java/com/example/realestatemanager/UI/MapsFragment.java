@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
@@ -37,6 +38,7 @@ import java.util.List;
 
 public class MapsFragment extends Fragment {
 
+    private Boolean isTablet;
     private Context mContext;
     private GoogleMap mMap;
     private static final int DEFAULT_ZOOM = 16;
@@ -78,6 +80,7 @@ public class MapsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        isTablet = getContext().getResources().getBoolean(R.bool.isTablet);
         return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 
@@ -124,9 +127,13 @@ public class MapsFragment extends Fragment {
                         }
                         Bundle arguments = new Bundle();
                         arguments.putString(PROPERTY_ID_DETAILS, Long.toString(property_id));
-                        Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
-                                .navigate(R.id.action_mapsFragment_to_item_detail_fragment, arguments);
-
+                        if (isTablet){
+                            Navigation.findNavController(getActivity(), R.id.item_detail_nav_container)
+                                    .navigate(R.id.fragment_item_detail, arguments);
+                        } else {
+                            Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
+                                    .navigate(R.id.action_mapsFragment_to_item_detail_fragment, arguments);
+                        }
                         return false;
                     }
 

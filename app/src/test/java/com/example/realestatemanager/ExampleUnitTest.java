@@ -57,7 +57,6 @@ public class ExampleUnitTest {
 
     @Test
     public void isInternetAvailableTest(){
-        //Network [] allNetworks = mockConnectivityManager.getAllNetworks();
         Network [] allNetworks = new Network[1];
         allNetworks[0] = mockNetwork;
 
@@ -72,5 +71,4 @@ public class ExampleUnitTest {
         assertEquals(value, true);
 
     }
-
 }

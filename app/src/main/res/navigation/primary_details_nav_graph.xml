@@ -22,7 +22,9 @@
         <action
             android:id="@+id/action_item_list_fragment_to_filterFragment"
             app:destination="@id/filterFragment" />
-
+        <action
+            android:id="@+id/action_item_list_fragment_to_loanSimulatorFragment"
+            app:destination="@id/loanSimulatorFragment" />
 
     </fragment>
 
@@ -78,6 +80,17 @@
         android:name="com.example.realestatemanager.UI.RecyclerViewFilterFragment"
         android:label="Properties filtered"
         tools:layout="@layout/fragment_recycler_view_filter" >
+        <action
+            android:id="@+id/action_recyclerViewFilterFragment_to_item_detail_fragment"
+            app:destination="@id/item_detail_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loanSimulatorFragment"
+        android:name="com.example.realestatemanager.UI.LoanSimulatorFragment"
+        android:label="Calculator"
+        tools:layout="@layout/fragment_loan_simulator" >
+
     </fragment>
 
 </navigation>

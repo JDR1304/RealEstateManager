@@ -92,7 +92,8 @@ public class RecyclerViewFilterFragment extends Fragment {
                             Navigation.findNavController(getActivity(), R.id.item_detail_nav_container)
                                     .navigate(R.id.fragment_item_detail, arguments);
                         } else {
-                            Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail).navigate(R.id.filter_list_container);
+                            Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
+                                    .navigate(R.id.action_recyclerViewFilterFragment_to_item_detail_fragment, arguments);
                         }
                     }
                 });

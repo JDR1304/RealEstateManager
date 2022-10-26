@@ -21,5 +21,9 @@
         android:title="Search"
         app:showAsAction="always" />
 
-
+    <item
+        android:id="@+id/simulator"
+        android:icon="@drawable/ic_baseline_calculate_24"
+        android:title="Simulator"
+        app:showAsAction="always" />
 </menu>
