@@ -177,7 +177,7 @@ public class ItemListFragment extends Fragment {
                     navHostFragment.getNavController().navigate(R.id.filterFragment);
                     return true;
                 case R.id.simulator:
-
+                    navHostFragment.getNavController().navigate(R.id.loanSimulatorFragment);
                     return true;
                 default:
                     return super.onOptionsItemSelected(item);

@@ -1,5 +1,6 @@
 package com.example.realestatemanager.database;
 
+import android.database.Cursor;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -63,5 +64,11 @@ public abstract class PropertyDAO {
 
     @RawQuery
     public abstract LiveData <List<PropertyWithPhoto>> getPropertiesFiltered(SupportSQLiteQuery query);
+
+    /*
+    Methode for the content provider
+     */
+    @Query("SELECT * FROM Property WHERE id = :propertyId")
+    public abstract Cursor getPropertyWithPhotoCursor (long propertyId);
 
 }

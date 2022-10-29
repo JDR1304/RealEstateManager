@@ -57,6 +57,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        
+        <provider
+            android:authorities="com.example.realestatemanager.provider"
+            android:name=".provider.PropertyWithPhotoContentProvider"
+            android:exported="true"/>
     </application>
 
 </manifest>

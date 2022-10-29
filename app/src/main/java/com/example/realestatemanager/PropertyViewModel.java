@@ -253,4 +253,40 @@ public class PropertyViewModel extends ViewModel {
         return listPropertyFiltered;
     }
 
+
+    public String calculateMonthly(String amount, String interestRate, String years, String contribution) {
+        double yearsValue = Double.valueOf(years);
+        double interestRateValue = Double.valueOf(interestRate) / 100;
+        double amountValue = Double.valueOf(amount);
+        double contributionValue = Double.valueOf(contribution);
+        double amountValueMinusContribution = amountValue - contributionValue;
+
+        double monthValue = (amountValueMinusContribution * interestRateValue /12) / (1-(Math.pow((1+interestRateValue/12),(-12*yearsValue))));
+        double monthValueFormat = (int)(Math.round(monthValue * 100))/100.0;
+        return Double.toString(monthValueFormat);
+    }
+
+    public String calculateTotalInterest(String amount, String monthValue, String years, String contribution) {
+        double yearsValue = Double.valueOf(years);
+        double amountValue = Double.valueOf(amount);
+        double monthly = Double.valueOf(monthValue);
+        double contributionValue = Double.valueOf(contribution);
+        double amountValueMinusContribution = amountValue - contributionValue;
+
+        double totalInterestValue = 12 * yearsValue * monthly - amountValueMinusContribution;
+        double totalInterestValueFormat = (int)(Math.round(totalInterestValue * 100))/100.0;
+        return Double.toString(totalInterestValueFormat);
+    }
+
+    public String calculateTotalPayment(String amount, String totalInterest, String contribution) {
+
+        double amountValue = Double.valueOf(amount);
+        double contributionValue = Double.valueOf(contribution);
+        double amountValueMinusContribution = amountValue - contributionValue;
+        double totalInterestValue = Double.valueOf(totalInterest);
+        double totalPaymentValue = totalInterestValue + amountValueMinusContribution;
+        double totalPaymentValueFormat = (int)(Math.round(totalPaymentValue * 100))/100.0;
+        return Double.toString(totalPaymentValueFormat);
+
+    }
 }

@@ -51,4 +51,11 @@
         tools:layout="@layout/fragment_recycler_view_filter" >
     </fragment>
 
+    <fragment
+        android:id="@+id/loanSimulatorFragment"
+        android:name="com.example.realestatemanager.UI.LoanSimulatorFragment"
+        android:label="Calculator"
+        tools:layout="@layout/fragment_loan_simulator" >
+    </fragment>
+
 </navigation>

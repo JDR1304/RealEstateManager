@@ -1,14 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UI.LoanSimulatorFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/loan_simulator_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:fillViewport="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".UI.LoanSimulatorFragment">
+
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:id="@+id/loan_amount"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Loan amount"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/teal_700" />
+
+            <EditText
+                android:id="@+id/loan_amount_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:hint="Amount in dollars"
+                android:inputType="number"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/payment_every_month"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/contribution"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                android:text="Contribution"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loan_amount"
+                app:tint="@color/teal_700" />
+
+            <EditText
+                android:id="@+id/contribution_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:hint="Contribution"
+                android:inputType="number"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/loan_amount_value"
+                app:layout_constraintTop_toBottomOf="@+id/loan_amount_value" />
+
+            <TextView
+                android:id="@+id/loan_term"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Loan Term"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contribution"
+                app:tint="@color/teal_700" />
+
+            <EditText
+                android:id="@+id/loan_term_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:hint="number of years"
+                android:inputType="number"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/loan_amount_value"
+                app:layout_constraintTop_toBottomOf="@+id/contribution_value" />
+
+
+            <TextView
+                android:id="@+id/interest_rate"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Interest rate"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loan_term"
+                app:tint="@color/teal_700" />
+
+            <EditText
+                android:id="@+id/interest_rate_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Percentage rate"
+                android:inputType="numberDecimal"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/loan_term_value"
+                app:layout_constraintTop_toBottomOf="@+id/loan_term_value" />
+
+            <Button
+                android:id="@+id/button_calculate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Calculate"
+                app:layout_constraintEnd_toEndOf="@+id/interest_rate_value"
+                app:layout_constraintStart_toStartOf="@+id/interest_rate"
+                app:layout_constraintTop_toBottomOf="@+id/interest_rate_value" />
+
+            <TextView
+                android:id="@+id/payment_every_month"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Monthly payments in $"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_calculate"
+                app:tint="@color/teal_700" />
+
+            <TextView
+                android:id="@+id/payment_every_month_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/payment_every_month"
+                app:layout_constraintTop_toBottomOf="@+id/button_calculate"
+                app:tint="@color/teal_200" />
+
+            <TextView
+                android:id="@+id/total_interest"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Total interest in $"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payment_every_month"
+                app:tint="@color/teal_700" />
+
+            <TextView
+                android:id="@+id/total_interest_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/payment_every_month"
+                app:layout_constraintTop_toBottomOf="@+id/payment_every_month_value"
+                app:tint="@color/teal_200" />
+
+            <TextView
+                android:id="@+id/total_payments"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Total payments in $"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/total_interest"
+                app:tint="@color/teal_700" />
+
+            <TextView
+                android:id="@+id/total_payments_value"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/payment_every_month"
+                app:layout_constraintTop_toBottomOf="@+id/total_interest_value"
+                app:tint="@color/teal_200" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
