@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import com.example.realestatemanager.PropertyViewModel;
 import com.example.realestatemanager.R;
 import com.example.realestatemanager.RetrieveIdPropertyId;
-import com.example.realestatemanager.UI.ItemList.ItemListFragmentDirections;
 import com.example.realestatemanager.UI.ItemList.ListViewRecyclerViewAdapter;
 import com.example.realestatemanager.injection.Injection;
 import com.example.realestatemanager.injection.ViewModelFactory;
@@ -37,8 +36,6 @@ public class RecyclerViewFilterFragment extends Fragment {
     private List<PropertyWithPhoto> propertyWithPhotoList = new ArrayList<>();
     private ListViewRecyclerViewAdapter listViewRecyclerViewAdapter;
     private final String PROPERTY_ID_DETAILS = "property_id_details";
-    private String propertyUId;
-    private LiveData<List<PropertyWithPhoto>> listLiveDataFiltered;
 
 
     public RecyclerViewFilterFragment() {
@@ -85,12 +82,11 @@ public class RecyclerViewFilterFragment extends Fragment {
                 listViewRecyclerViewAdapter = new ListViewRecyclerViewAdapter(propertyWithPhotoList, propertyViewModel, new RetrieveIdPropertyId() {
                     @Override
                     public void onClickItem(String propertyId) {
-                        propertyUId = propertyId;
                         Bundle arguments = new Bundle();
                         arguments.putString(PROPERTY_ID_DETAILS, propertyId);
                         if (isTablet) {
                             Navigation.findNavController(getActivity(), R.id.item_detail_nav_container)
-                                    .navigate(R.id.fragment_item_detail, arguments);
+                                    .navigate(R.id.item_detail_fragment, arguments);
                         } else {
                             Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
                                     .navigate(R.id.action_recyclerViewFilterFragment_to_item_detail_fragment, arguments);

@@ -8,6 +8,7 @@
 
     <ImageView
         android:id="@+id/image"
+        tools:ignore="ContentDescription"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="8dp"
@@ -19,6 +20,7 @@
 
     <ImageView
         android:id="@+id/image_delete"
+        tools:ignore="ContentDescription"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:paddingBottom="8dp"

@@ -31,7 +31,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Property price"
+                android:text="@string/property_price"
                 android:textStyle="bold"
                 android:textColor="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +40,7 @@
 
             <EditText
                 android:id="@+id/property_price_value"
+                tools:ignore="Autofill"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +50,7 @@
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
                 android:inputType="number"
-                android:hint="Property price"
+                android:hint="@string/property_price"
                 app:layout_constraintStart_toEndOf="@+id/property_price"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,7 +63,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Property type"
+                android:text="@string/property_type"
                 android:textStyle="bold"
                 android:textColor="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +79,7 @@
                 android:layout_marginTop="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:hint="Property type"
+                android:hint="@string/property_type"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/type"
                 app:layout_constraintTop_toBottomOf="@+id/property_price"
@@ -93,7 +94,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Media"
+                android:text="@string/media"
                 android:textStyle="bold"
                 android:textColor="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Add Media"
+                android:text="@string/add_media"
                 android:paddingStart="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/item_photo"
                 app:layout_constraintStart_toEndOf="@+id/media"
@@ -119,7 +120,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:paddingStart="8dp"
-                android:text="Take Picture"
+                android:text="@string/take_picture"
                 app:layout_constraintBottom_toBottomOf="@+id/add_media_button"
                 app:layout_constraintStart_toEndOf="@+id/add_media_button" />
 
@@ -146,7 +147,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Description"
+                android:text="@string/description"
                 android:textIsSelectable="true"
                 android:textStyle="bold"
                 android:textColor="@color/teal_700"
@@ -157,6 +158,7 @@
 
             <EditText
                 android:id="@+id/property_description"
+                tools:ignore="Autofill"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,13 +167,14 @@
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
-                android:text="Text description for the property"
+                android:text="@string/text_description_for_the_property"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description" />
 
             <ImageView
                 android:id="@+id/image_view_surface"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
@@ -190,7 +193,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Surface"
+                android:text="@string/surface"
                 android:textStyle="bold"
                 android:textColor="@color/teal_200"
                 app:layout_constraintEnd_toStartOf="@+id/surface_value"
@@ -199,11 +202,12 @@
 
             <EditText
                 android:id="@+id/surface_value"
+                tools:ignore="Autofill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:hint="Square meters"
+                android:hint="@string/square_meters"
                 android:orientation="horizontal"
                 android:inputType="number"
                 android:paddingTop="8dp"
@@ -213,6 +217,7 @@
 
             <ImageView
                 android:id="@+id/image_view_home"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
@@ -231,7 +236,7 @@
                 android:layout_marginTop="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Number of rooms"
+                android:text="@string/number_of_rooms"
                 android:textStyle="bold"
                 android:textColor="@color/teal_200"
                 app:layout_constraintStart_toEndOf="@+id/image_view_home"
@@ -248,6 +253,7 @@
 
             <ImageView
                 android:id="@+id/Image_view_bathrooms"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
@@ -266,7 +272,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Number of bathrooms"
+                android:text="@string/number_of_bathrooms"
                 android:textStyle="bold"
                 android:textColor="@color/teal_200"
                 app:layout_constraintStart_toEndOf="@+id/Image_view_bathrooms"
@@ -283,6 +289,7 @@
 
             <ImageView
                 android:id="@+id/Image_view_bedrooms"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
@@ -301,7 +308,7 @@
                 android:layout_marginTop="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Number of bedrooms"
+                android:text="@string/number_of_bedrooms"
                 android:textStyle="bold"
                 android:textColor="@color/teal_200"
                 app:layout_constraintStart_toEndOf="@+id/Image_view_bedrooms"
@@ -313,7 +320,6 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Nb value"
                 app:layout_constraintEnd_toEndOf="@+id/number_of_bathrooms_value"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/number_of_bedrooms"
@@ -321,6 +327,7 @@
 
             <ImageView
                 android:id="@+id/image_view_location"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
@@ -332,18 +339,20 @@
 
             <EditText
                 android:id="@+id/street"
+                tools:ignore="Autofill"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="2dp"
-                android:hint="Street"
+                android:hint="@string/street"
                 app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/number_of_bedrooms" />
 
             <EditText
                 android:id="@+id/post_code"
+                tools:ignore="Autofill"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -351,19 +360,20 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
                 android:inputType="number"
-                android:hint="Post code"
+                android:hint="@string/post_code"
                 app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/street" />
 
             <EditText
                 android:id="@+id/city"
+                tools:ignore="Autofill"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:hint="City"
+                android:hint="@string/city"
                 app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/post_code" />
 
@@ -376,7 +386,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Points of interest"
+                android:text="@string/points_of_interest"
                 android:textStyle="bold"
                 android:textColor="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
@@ -388,7 +398,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="School"
+                android:text="@string/school"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/points_of_interest"/>
 
@@ -397,7 +407,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Park"
+                android:text="@string/park"
                 app:layout_constraintStart_toEndOf="@+id/chek_box_school"
                 app:layout_constraintTop_toBottomOf="@+id/points_of_interest"/>
 
@@ -406,7 +416,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Store"
+                android:text="@string/store"
                 app:layout_constraintStart_toEndOf="@+id/chek_box_park"
                 app:layout_constraintTop_toBottomOf="@+id/points_of_interest"/>
 
@@ -419,7 +429,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Agent name"
+                android:text="@string/agent_name"
                 android:textStyle="bold"
                 android:textColor="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
@@ -427,13 +437,14 @@
 
             <EditText
                 android:id="@+id/agent_name_value"
+                tools:ignore="Autofill"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
-                android:hint="Agent name"
+                android:hint="@string/agent_name"
                 app:layout_constraintStart_toEndOf="@+id/agent_name"
                 app:layout_constraintTop_toBottomOf="@+id/chek_box_school" />
 
@@ -443,7 +454,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Sold"
+                android:text="@string/sold"
                 app:layout_constraintStart_toEndOf="@+id/agent_name_value"
                 app:layout_constraintTop_toBottomOf="@+id/chek_box_school"/>
 
@@ -452,7 +463,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Create or update"
+                android:text="@string/create_or_update"
                 android:padding="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -5,25 +5,25 @@
     <item
         android:id="@+id/map"
         android:icon="@drawable/ic_baseline_map_24"
-        android:title="Settings"
-        app:showAsAction="always" />
+        android:title="@string/settings"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/add"
         android:icon="@drawable/ic_baseline_add_24"
-        android:title="Settings"
-        app:showAsAction="always" />
+        android:title="@string/settings"
+        app:showAsAction="ifRoom" />
 
 
     <item
         android:id="@+id/search"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title="Search"
-        app:showAsAction="always" />
+        android:title="@string/search"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/simulator"
         android:icon="@drawable/ic_baseline_calculate_24"
-        android:title="Simulator"
-        app:showAsAction="always" />
+        android:title="@string/simulator"
+        app:showAsAction="ifRoom" />
 </menu>

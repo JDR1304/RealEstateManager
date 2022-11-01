@@ -68,7 +68,7 @@ public abstract class PropertyDAO {
     /*
     Methode for the content provider
      */
-    @Query("SELECT * FROM Property WHERE id = :propertyId")
+    @Query("SELECT * FROM Property JOIN Photo ON Property.id = Photo.propertyId WHERE Property.id = :propertyId")
     public abstract Cursor getPropertyWithPhotoCursor (long propertyId);
 
 }

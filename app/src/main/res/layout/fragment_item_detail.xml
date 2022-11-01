@@ -30,7 +30,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Media"
+                android:text="@string/media"
                 android:textStyle="bold"
                 android:textColor="@color/teal_700"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Description"
+                android:text="@string/description"
                 android:textIsSelectable="true"
                 android:textStyle="bold"
                 android:textColor="@color/teal_700"
@@ -78,13 +78,14 @@
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="8dp"
-                android:text="Text description for the property"
+                android:text="@string/text_description_for_the_property"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description" />
 
             <ImageView
                 android:id="@+id/image_view_surface"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
@@ -103,7 +104,7 @@
                 android:paddingBottom="8dp"
                 android:textStyle="bold"
                 android:textColor="@color/teal_200"
-                android:text="Surface"
+                android:text="@string/surface"
                 app:layout_constraintEnd_toStartOf="@+id/surface_value"
                 app:layout_constraintStart_toEndOf="@+id/image_view_surface"
                 app:layout_constraintTop_toBottomOf="@+id/property_description" />
@@ -116,13 +117,14 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Square meters"
+                android:text="@string/square_meters"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/surface"
                 app:layout_constraintTop_toBottomOf="@+id/property_description" />
 
             <ImageView
                 android:id="@+id/image_view_home"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
@@ -141,7 +143,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Number of rooms"
+                android:text="@string/number_of_rooms"
                 app:layout_constraintStart_toEndOf="@+id/image_view_home"
                 app:layout_constraintTop_toBottomOf="@+id/surface" />
 
@@ -153,12 +155,13 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Nb value"
+                android:text="@string/nb_value"
                 app:layout_constraintStart_toEndOf="@+id/number_of_rooms"
                 app:layout_constraintTop_toBottomOf="@+id/surface_value" />
 
             <ImageView
                 android:id="@+id/Image_view_bathrooms"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
@@ -177,7 +180,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Number of bathrooms"
+                android:text="@string/number_of_bathrooms"
                 app:layout_constraintStart_toEndOf="@+id/Image_view_bathrooms"
                 app:layout_constraintTop_toBottomOf="@+id/number_of_rooms" />
 
@@ -189,12 +192,13 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Nb value"
+                android:text="@string/nb_value"
                 app:layout_constraintStart_toEndOf="@+id/number_of_bathrooms"
                 app:layout_constraintTop_toBottomOf="@+id/number_of_rooms_value" />
 
             <ImageView
                 android:id="@+id/Image_view_bedrooms"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
@@ -213,7 +217,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Number of bedrooms"
+                android:text="@string/number_of_bedrooms"
                 app:layout_constraintStart_toEndOf="@+id/Image_view_bedrooms"
                 app:layout_constraintTop_toBottomOf="@+id/number_of_bathrooms" />
 
@@ -225,12 +229,13 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Nb value"
+                android:text="@string/nb_value"
                 app:layout_constraintStart_toEndOf="@+id/number_of_bedrooms"
                 app:layout_constraintTop_toBottomOf="@+id/number_of_bathrooms_value" />
 
             <ImageView
                 android:id="@+id/image_view_location"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:paddingTop="8dp"
@@ -248,7 +253,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="2dp"
-                android:text="street"
+                android:text="@string/street"
                 app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/number_of_bedrooms" />
 
@@ -260,7 +265,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
-                android:text="Post code"
+                android:text="@string/post_code"
                 app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/street" />
 
@@ -272,11 +277,11 @@
                 android:paddingStart="16dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="8dp"
-                android:text="City"
+                android:text="@string/city"
                 app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/post_code" />
 
-            <fragment
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/map"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="200dp"

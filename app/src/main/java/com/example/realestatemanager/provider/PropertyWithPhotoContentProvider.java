@@ -5,11 +5,10 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
+
 
 import com.example.realestatemanager.database.RealEstateManagerDataBase;
 import com.example.realestatemanager.models.PropertyWithPhoto;
@@ -53,25 +52,10 @@ public class PropertyWithPhotoContentProvider extends ContentProvider {
         return "vnd.android.cursor.item/" + AUTHORITY + "." + TABLE_NAME;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-       /* if (getContext() != null && values != null) {
-
-            final long id = RealEstateManagerDataBase.getInstance(getContext()).propertyDao().createPropertyWithPhotos(PropertyWithPhoto.fromContentValues(values));
-
-            if (id != 0) {
-
-                getContext().getContentResolver().notifyChange(uri, null);
-
-                return ContentUris.withAppendedId(uri, id);
-
-            }
-
-        }
-
-        throw new IllegalArgumentException("Failed to insert row into " + uri);*/
         return null;
     }
 

@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.realestatemanager.PropertyViewModel;
 import com.example.realestatemanager.R;
+import com.example.realestatemanager.Utils;
 import com.example.realestatemanager.databinding.FragmentItemDetailBinding;
 import com.example.realestatemanager.injection.Injection;
 import com.example.realestatemanager.injection.ViewModelFactory;
@@ -176,26 +177,30 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
     }
 
     public LatLng getLocationFromAddress(Context context, String strAddress) {
-        if (strAddress != "null 0 null") {
-            Geocoder coder = new Geocoder(context);
-            List<Address> address;
-            LatLng p1 = null;
+        if (Utils.isInternetAvailable(context)) {
+            if (strAddress != "null 0 null") {
+                Geocoder coder = new Geocoder(context);
+                List<Address> address;
+                LatLng p1 = null;
 
-            try {
-                address = coder.getFromLocationName(strAddress, 5);
-                if (address == null) {
-                    return null;
+                try {
+                    address = coder.getFromLocationName(strAddress, 5);
+                    if (address == null) {
+                        return null;
+                    }
+                    Address location = address.get(0);
+                    location.getLatitude();
+                    location.getLongitude();
+
+                    p1 = new LatLng(location.getLatitude(), location.getLongitude());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                Address location = address.get(0);
-                location.getLatitude();
-                location.getLongitude();
-
-                p1 = new LatLng(location.getLatitude(), location.getLongitude());
-            } catch (Exception e) {
-                e.printStackTrace();
+                return p1;
             }
-            return p1;
+
         }
+        Toast.makeText(context.getApplicationContext(), "Not connected", Toast.LENGTH_LONG).show();
         return null;
     }
 
@@ -211,7 +216,6 @@ public class ItemDetailFragment extends Fragment implements GoogleMap.OnMyLocati
         if (!isTablet) {
             switch (item.getItemId()) {
                 case R.id.update:
-                    Toast.makeText(getActivity(), "Update mobile...", Toast.LENGTH_LONG).show();
                     Bundle arguments = new Bundle();
                     arguments.putString(PROPERTY_ID_DETAILS, Long.toString(propertyId));
                     action = ItemDetailFragmentDirections.actionItemDetailFragmentToCreateUpdateContainer();

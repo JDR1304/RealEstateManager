@@ -242,11 +242,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
-                    /*if (propertyId != 0) {
-                       propertyWithPhoto.property.setPriceInDollars(Double.valueOf(String.valueOf(s)));
-                    } else {*/
                     priceInDollarsListenerValue = Double.valueOf(String.valueOf(s));
-                    //}
                 }
             }
 
@@ -261,11 +257,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               /* if (propertyId != 0) {
-                    propertyWithPhoto.property.setPropertyType(types[position]);
-                } else {*/
                 propertyTypeListenerValue = types[position];
-                // }
             }
 
             @Override
@@ -279,33 +271,21 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         numberPickerRooms.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-               /* if (propertyId != 0) {
-                    propertyWithPhoto.property.setNumberOfRooms(newVal);
-                } else {*/
                 numberOfRoomsListenerValue = newVal;
             }
-            // }
         });
 
         numberPickerBathrooms.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                /*if (propertyId != 0) {
-                    propertyWithPhoto.property.setNumberOfBathrooms(newVal);
-                } else {*/
                 numberOfBathRoomsListenerValue = newVal;
             }
-            // }
         });
 
         numberPickerBedrooms.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                /*if (propertyId != 0) {
-                    propertyWithPhoto.property.setNumberOfBedrooms(newVal);
-                } else {*/
                 numberOfBedRoomsListenerValue = newVal;
-                // }
             }
         });
 
@@ -321,11 +301,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
-                   /* if (propertyId != 0) {
-                        propertyWithPhoto.property.setSurface(Float.valueOf(String.valueOf(s)));
-                    } else {*/
                     surfaceListenerValue = Float.valueOf(String.valueOf(s));
-                    //  }
                 }
             }
 
@@ -346,11 +322,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
-                   /* if (propertyId != 0) {
-                        propertyWithPhoto.property.getAddress().setStreet(String.valueOf(s));
-                    } else {*/
                     streetListenerValue = String.valueOf(s);
-                    // }
                 }
             }
 
@@ -369,11 +341,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
-                    /*if (propertyId != 0) {
-                        propertyWithPhoto.property.getAddress().setPostCode(Integer.valueOf(String.valueOf(s)));
-                    } else {*/
                     postCodeListenerValue = Integer.valueOf(String.valueOf(s));
-                    // }
                 }
             }
 
@@ -392,11 +360,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
-                   /* if (propertyId != 0) {
-                        propertyWithPhoto.property.getAddress().setCity(String.valueOf(s));
-                    } else {*/
                     cityListenerValue = String.valueOf(s);
-                    // }
                 }
             }
 
@@ -417,11 +381,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() != 0) {
-                    /*if (propertyId != 0) {
-                        propertyWithPhoto.property.setDescription(String.valueOf(s));
-                    } else {*/
                     descriptionListenerValue = String.valueOf(s);
-                    // }
                 }
             }
 
@@ -442,11 +402,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() > 0) {
-                   /* if (propertyId != 0) {
-                        propertyWithPhoto.property.setRealEstateAgentName(String.valueOf(s));
-                    } else {*/
                     realEstateAgentNameListenerValue = String.valueOf(s);
-                    //}
                 }
 
             }
@@ -463,50 +419,28 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         binding.chekBoxSchool.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-               /* if (propertyId != 0) {
-                    propertyWithPhoto.property.setPointsOfInterestSchool(isChecked);
-                } else {*/
                 pointsOfInterestSchoolListenerValue = isChecked;
-                //}
             }
         });
 
         binding.chekBoxPark.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-               /* if (propertyId != 0) {
-                    propertyWithPhoto.property.setPointsOfInterestPark(isChecked);
-                } else {*/
                 pointsOfInterestParkListenerValue = isChecked;
-                // }
             }
         });
 
         binding.chekBoxStore.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-               /* if (propertyId != 0) {
-                    propertyWithPhoto.property.setPointsOfInterestStore(isChecked);
-                } else {*/
                 pointsOfInterestStoreListenerValue = isChecked;
-                // }
             }
         });
 
         binding.checkBoxStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-              /*  if (propertyId != 0) {
-                    propertyWithPhoto.property.setPropertyStatus(isChecked);
-                    if (isChecked == true) {
-                        long currentTime = System.currentTimeMillis();
-                        propertyWithPhoto.property.setPropertySaleDate(currentTime);
-                    } else {
-                        propertyWithPhoto.property.setPropertySaleDate(0);
-                    }
-                } else {*/
                 propertyStatusListenerValue = isChecked;
-                // }
             }
         });
 
@@ -516,7 +450,6 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
         addMedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Add Picture ...", Toast.LENGTH_LONG).show();
                 Intent galleryPhotoIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 galleryPhotoIntent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(galleryPhotoIntent, GALLERY_IMAGE_CAPTURE);
@@ -539,12 +472,13 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             }
             String uriToStringPhoto = selectedImage.toString();
             pictures.add(new Photo(propertyId, uriToStringPhoto, uriToStringPhoto));
-        }
-
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            pictures.add(new Photo(propertyId, photoURI.toString(), photoURI.toString()));
         } else {
-            Toast.makeText(getActivity(), "Picture not shot", Toast.LENGTH_LONG).show();
+
+            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+                pictures.add(new Photo(propertyId, photoURI.toString(), photoURI.toString()));
+            } else {
+                Toast.makeText(getActivity(), "Picture not shot", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -601,7 +535,6 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (propertyId == 0) {
-                    //propertyViewModel.createPropertyWithPhotos(propertyWithPhoto.property, propertyWithPhoto.photos);
                     Address addressCreated = new Address(streetListenerValue, postCodeListenerValue, cityListenerValue);
                     Property propertyCreated = new Property(propertyTypeListenerValue, priceInDollarsListenerValue, surfaceListenerValue,
                             numberOfRoomsListenerValue, numberOfBathRoomsListenerValue, numberOfBedRoomsListenerValue,
@@ -613,7 +546,7 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
 
                     Toast.makeText(getActivity(), "Property Created", Toast.LENGTH_LONG).show();
                 } else {
-                    // je recupère les photos de la propriété que j'ajoute a la liste dans laquelle j'ai deja ajouté des photos
+                    // Get property photo and add to the list where I already add photos.
                     for (int i = 0; i < propertyWithPhoto.photos.size(); i++) {
                         pictures.add(propertyWithPhoto.photos.get(i));
                     }

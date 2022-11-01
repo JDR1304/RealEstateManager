@@ -4,10 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_details"
     android:label="@string/title_item_detail"
-    app:startDestination="@id/fragment_item_detail">
+    app:startDestination="@id/item_detail_fragment">
 
     <fragment
-        android:id="@+id/fragment_item_detail"
+        android:id="@+id/item_list_fragment"
+        android:name="com.example.realestatemanager.UI.ItemList.ItemListFragment"
+        android:label="@string/title_item_detail"
+        tools:layout="@layout/fragment_item_list">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/item_detail_fragment"
         android:name="com.example.realestatemanager.UI.ItemDetail.ItemDetailFragment"
         android:label="@string/title_item_detail"
         tools:layout="@layout/fragment_item_detail"

@@ -64,14 +64,12 @@ public class ListViewRecyclerViewAdapter extends RecyclerView.Adapter<ListViewRe
         holder.itemView.setOnClickListener(v -> {
             listener.onClickItem(Long.toString(propertyWithPhoto.property.getId()));
             for (View item: listView) {
-                if(listView.get(holder.getAdapterPosition()) == item) {
+                if (listView.get(holder.getAdapterPosition()) == item) {
                     item.setBackgroundColor(0xFF8CF1EC);
-                }
-                else{
+                } else {
                     item.setBackgroundColor(0xFFFFFFFF);
                 }
-            };
-            //holder.itemView.setBackgroundColor(0xFFBB86FC)
+            }
         });
     }
 

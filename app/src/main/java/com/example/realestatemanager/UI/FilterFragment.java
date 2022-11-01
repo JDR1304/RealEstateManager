@@ -16,22 +16,15 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.realestatemanager.PropertyViewModel;
 import com.example.realestatemanager.R;
-import com.example.realestatemanager.UI.ItemDetail.ItemDetailCreateUpdateRecyclerViewAdapter;
 import com.example.realestatemanager.databinding.FilterFragmentBinding;
 import com.example.realestatemanager.injection.Injection;
 import com.example.realestatemanager.injection.ViewModelFactory;
 import com.example.realestatemanager.models.PropertiesFiltered;
-import com.example.realestatemanager.models.PropertyWithPhoto;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FilterFragment extends Fragment {
 
@@ -62,7 +55,6 @@ public class FilterFragment extends Fragment {
 
     private PropertiesFiltered propertiesFiltered;
     private PropertyViewModel propertyViewModel;
-    List<PropertyWithPhoto> listFiltered = new ArrayList<>();
 
     public FilterFragment() {
     }

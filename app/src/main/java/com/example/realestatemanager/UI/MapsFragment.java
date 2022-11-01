@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.location.Address;
@@ -16,12 +14,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.realestatemanager.PropertyViewModel;
 import com.example.realestatemanager.R;
-import com.example.realestatemanager.RetrieveIdPropertyId;
-import com.example.realestatemanager.UI.ItemList.ItemListFragmentDirections;
-import com.example.realestatemanager.UI.ItemList.ListViewRecyclerViewAdapter;
+import com.example.realestatemanager.Utils;
 import com.example.realestatemanager.injection.Injection;
 import com.example.realestatemanager.injection.ViewModelFactory;
 import com.example.realestatemanager.models.PropertyWithPhoto;
@@ -62,9 +59,6 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
-            //LatLng sydney = new LatLng(-34, 151);
-            //googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            //googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         }
     };
 
@@ -127,9 +121,9 @@ public class MapsFragment extends Fragment {
                         }
                         Bundle arguments = new Bundle();
                         arguments.putString(PROPERTY_ID_DETAILS, Long.toString(property_id));
-                        if (isTablet){
+                        if (isTablet) {
                             Navigation.findNavController(getActivity(), R.id.item_detail_nav_container)
-                                    .navigate(R.id.fragment_item_detail, arguments);
+                                    .navigate(R.id.item_detail_fragment, arguments);
                         } else {
                             Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
                                     .navigate(R.id.action_mapsFragment_to_item_detail_fragment, arguments);
@@ -145,26 +139,29 @@ public class MapsFragment extends Fragment {
     }
 
     public LatLng getLocationFromAddress(Context context, String strAddress) {
-        if (strAddress != "null 0 null") {
-            Geocoder coder = new Geocoder(context);
-            List<Address> address;
-            LatLng p1 = null;
+        if (Utils.isInternetAvailable(context)) {
+            if (strAddress != "null 0 null") {
+                Geocoder coder = new Geocoder(context);
+                List<Address> address;
+                LatLng p1 = null;
 
-            try {
-                address = coder.getFromLocationName(strAddress, 5);
-                if (address == null) {
-                    return null;
+                try {
+                    address = coder.getFromLocationName(strAddress, 5);
+                    if (address == null) {
+                        return null;
+                    }
+                    Address location = address.get(0);
+                    location.getLatitude();
+                    location.getLongitude();
+
+                    p1 = new LatLng(location.getLatitude(), location.getLongitude());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                Address location = address.get(0);
-                location.getLatitude();
-                location.getLongitude();
-
-                p1 = new LatLng(location.getLatitude(), location.getLongitude());
-            } catch (Exception e) {
-                e.printStackTrace();
+                return p1;
             }
-            return p1;
         }
+        Toast.makeText(context.getApplicationContext(), "Not connected", Toast.LENGTH_LONG).show();
         return null;
     }
 

@@ -17,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.realestatemanager.PropertyViewModel;
 import com.example.realestatemanager.R;
@@ -123,7 +122,7 @@ public class ItemListFragment extends Fragment {
                         arguments.putString(PROPERTY_ID_DETAILS, propertyId);
                         if (isTablet) {
                             Navigation.findNavController(itemDetailFragmentContainer)
-                                    .navigate(R.id.fragment_item_detail, arguments);
+                                    .navigate(R.id.item_detail_fragment, arguments);
                         } else {
                             action = ItemListFragmentDirections.showItemDetail();
                             action.setPropertyIdDetails(propertyId);
@@ -159,21 +158,17 @@ public class ItemListFragment extends Fragment {
         if (isTablet) {
             switch (item.getItemId()) {
                 case R.id.map:
-                    Toast.makeText(getActivity(), "COUCOU List tablet ...", Toast.LENGTH_LONG).show();
                     navHostFragment.getNavController().navigate(R.id.mapsFragment);
                     return true;
                 case R.id.add:
-                    Toast.makeText(getActivity(), "Add List tablet...", Toast.LENGTH_LONG).show();
                     navHostFragment.getNavController().navigate(R.id.create_update_container);
                     return true;
                case R.id.update:
                     Bundle arguments = new Bundle();
                     arguments.putString(PROPERTY_ID_CREATE_UPDATE, propertyUId);
-                    Toast.makeText(getActivity(), "Update 1 List tablet...", Toast.LENGTH_LONG).show();
                     navHostFragment.getNavController().navigate(R.id.create_update_container, arguments);
                     return true;
                 case R.id.search:
-                    Toast.makeText(getActivity(), "Search List tablet...", Toast.LENGTH_LONG).show();
                     navHostFragment.getNavController().navigate(R.id.filterFragment);
                     return true;
                 case R.id.simulator:
@@ -186,19 +181,16 @@ public class ItemListFragment extends Fragment {
         } else {
             switch (item.getItemId()) {
                 case R.id.map:
-                    Toast.makeText(getActivity(), "COUCOU List ...", Toast.LENGTH_LONG).show();
                     Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
                             .navigate(R.id.action_item_list_fragment_to_mapsFragment);
                     return true;
                 case R.id.add:
-                    Toast.makeText(getActivity(), "Add List...", Toast.LENGTH_LONG).show();
                     actionCreate = ItemListFragmentDirections.actionItemListFragmentToCreateUpdateContainer();
                     actionCreate.setPropertyIdCreateUpdate(null);
                     Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
                             .navigate(actionCreate);
                     return true;
                 case R.id.search:
-                    Toast.makeText(getActivity(), "Search List...", Toast.LENGTH_LONG).show();
                     Navigation.findNavController(getActivity(), R.id.nav_host_fragment_item_detail)
                             .navigate(R.id.action_item_list_fragment_to_filterFragment);
                     return true;

@@ -30,7 +30,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Price"
+                android:text="@string/price"
                 android:textColor="@color/teal_700"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,11 +39,12 @@
 
             <EditText
                 android:id="@+id/property_price_value_min"
+                tools:ignore="Autofill"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:hint="Price min"
+                android:hint="@string/price_min"
                 android:inputType="number"
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
@@ -53,11 +54,12 @@
 
             <EditText
                 android:id="@+id/property_price_value_max"
+                tools:ignore="Autofill"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:hint="Price max"
+                android:hint="@string/price_max"
                 android:inputType="number"
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
@@ -75,7 +77,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Property type"
+                android:text="@string/property_type"
                 android:textColor="@color/teal_700"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +91,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:hint="Property type"
+                android:hint="@string/property_type"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:textStyle="bold"
@@ -107,7 +109,7 @@
                 android:paddingTop="8dp"
                 android:paddingRight="8dp"
                 android:paddingBottom="8dp"
-                android:text="Media numbers"
+                android:text="@string/media_numbers"
                 android:textColor="@color/teal_700"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/numbers_media_value"
@@ -129,6 +131,7 @@
 
             <ImageView
                 android:id="@+id/image_view_surface"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
@@ -147,7 +150,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Surface"
+                android:text="@string/surface"
                 android:textColor="@color/teal_200"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/surface_value_min"
@@ -156,11 +159,12 @@
 
             <EditText
                 android:id="@+id/surface_value_min"
+                tools:ignore="Autofill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:hint="Square min"
+                android:hint="@string/square_min"
                 android:inputType="number"
                 android:orientation="horizontal"
                 android:paddingTop="8dp"
@@ -170,11 +174,12 @@
 
             <EditText
                 android:id="@+id/surface_value_max"
+                tools:ignore="Autofill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:hint="Square max"
+                android:hint="@string/square_max"
                 android:inputType="number"
                 android:orientation="horizontal"
                 android:paddingTop="8dp"
@@ -184,6 +189,7 @@
 
             <ImageView
                 android:id="@+id/image_view_home"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="32dp"
@@ -202,7 +208,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Number of rooms"
+                android:text="@string/number_of_rooms"
                 android:textColor="@color/teal_200"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/image_view_home"
@@ -223,6 +229,7 @@
 
             <ImageView
                 android:id="@+id/Image_view_bathrooms"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="43dp"
@@ -241,7 +248,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Number of bathrooms"
+                android:text="@string/number_of_bathrooms"
                 android:textColor="@color/teal_200"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/Image_view_bathrooms"
@@ -260,6 +267,7 @@
 
             <ImageView
                 android:id="@+id/Image_view_bedrooms"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="43dp"
@@ -278,7 +286,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Number of bedrooms"
+                android:text="@string/number_of_bedrooms"
                 android:textColor="@color/teal_200"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/Image_view_bedrooms"
@@ -292,7 +300,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Nb value"
+                android:text="@string/nb_value"
                 app:layout_constraintEnd_toEndOf="@+id/number_of_bathrooms_value"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/number_of_bedrooms"
@@ -300,6 +308,7 @@
 
             <ImageView
                 android:id="@+id/image_view_location"
+                tools:ignore="ContentDescription"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
@@ -310,39 +319,16 @@
                 app:srcCompat="@drawable/ic_baseline_location_on_24"
                 app:tint="@color/teal_700" />
 
-            <!--EditText
-                android:id="@+id/street"
-                style="?android:attr/textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="2dp"
-                android:hint="Street"
-                app:layout_constraintStart_toEndOf="@+id/image_view_location"
-                app:layout_constraintTop_toBottomOf="@+id/number_of_bedrooms" />
-
-            <EditText
-                android:id="@+id/post_code"
-                style="?android:attr/textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:hint="Post code"
-                app:layout_constraintStart_toEndOf="@+id/image_view_location"
-                app:layout_constraintTop_toBottomOf="@+id/street" /-->
-
             <EditText
                 android:id="@+id/city"
+                tools:ignore="Autofill"
                 style="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="2dp"
-                android:hint="City"
+                android:hint="@string/city"
                 app:layout_constraintStart_toEndOf="@+id/image_view_location"
                 app:layout_constraintTop_toBottomOf="@+id/number_of_bedrooms" />
 
@@ -355,7 +341,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Points of interest"
+                android:text="@string/points_of_interest"
                 android:textColor="@color/teal_700"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -367,7 +353,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="School"
+                android:text="@string/school"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/points_of_interest" />
 
@@ -376,7 +362,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Park"
+                android:text="@string/park"
                 app:layout_constraintStart_toEndOf="@+id/chek_box_school"
                 app:layout_constraintTop_toBottomOf="@+id/points_of_interest" />
 
@@ -385,7 +371,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Store"
+                android:text="@string/store"
                 app:layout_constraintStart_toEndOf="@+id/chek_box_park"
                 app:layout_constraintTop_toBottomOf="@+id/points_of_interest" />
 
@@ -397,7 +383,7 @@
                 android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="Sold"
+                android:text="@string/sold"
                 android:textColor="@color/teal_700"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -408,7 +394,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Sold"
+                android:text="@string/sold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sold_filter" />
 
@@ -418,7 +404,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:padding="16dp"
-                android:text="Search"
+                android:text="@string/search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/check_box_status" />

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,10 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.realestatemanager.PropertyViewModel;
 import com.example.realestatemanager.R;
-import com.example.realestatemanager.injection.Injection;
-import com.example.realestatemanager.injection.ViewModelFactory;
 
 
 public class LoanSimulatorFragment extends Fragment {
@@ -39,7 +35,6 @@ public class LoanSimulatorFragment extends Fragment {
     private String interestRateListener;
     private String contributionListener;
 
-    private PropertyViewModel propertyViewModel;
 
 
     public LoanSimulatorFragment() {
@@ -49,7 +44,6 @@ public class LoanSimulatorFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        configureViewModel();
     }
 
     @Override
@@ -71,11 +65,7 @@ public class LoanSimulatorFragment extends Fragment {
         calculateButton();
 
     }
-    private void configureViewModel() {
-        ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(getContext());
-        this.propertyViewModel = ViewModelProviders.of(getActivity(), viewModelFactory).get(PropertyViewModel.class);
 
-    }
     public void init(View view) {
         calculatorButton = view.findViewById(R.id.button_calculate);
         loanAmount = view.findViewById(R.id.loan_amount_value);
@@ -178,36 +168,54 @@ public class LoanSimulatorFragment extends Fragment {
                 if (loanAmountListener != null && loanTermListener != null
                         && interestRateListener != null && contributionListener != null && !loanAmountListener.equals("") && !loanTermListener.equals("")
                         && !interestRateListener.equals("") && !contributionListener.equals("")) {
-                    String monthly = propertyViewModel.calculateMonthly(loanAmountListener, interestRateListener, loanTermListener, contributionListener);
+                    String monthly = calculateMonthly(loanAmountListener, interestRateListener, loanTermListener, contributionListener);
                     paymentEveryMonth.setText(monthly);
-                    String totalInterestValue = propertyViewModel.calculateTotalInterest(loanAmountListener, monthly, loanTermListener, contributionListener);
+                    String totalInterestValue = calculateTotalInterest(loanAmountListener, monthly, loanTermListener, contributionListener);
                     totalInterest.setText(totalInterestValue);
-                    String totalPaymentValue = propertyViewModel.calculateTotalPayment(loanAmountListener, totalInterestValue, contributionListener);
+                    String totalPaymentValue = calculateTotalPayment(loanAmountListener, totalInterestValue, contributionListener);
                     totalPayment.setText(totalPaymentValue);
                 } else {
-                    Toast.makeText(getContext(), "Fill up Amount, Contribution, Term and Interest Fields", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Fill in Amount, Contribution, Term and Interest Fields", Toast.LENGTH_LONG).show();
                 }
 
             }
         });
     }
 
-    public void calculate(String amount, String interestRate, String years) {
+    public String calculateMonthly(String amount, String interestRate, String years, String contribution) {
         double yearsValue = Double.valueOf(years);
         double interestRateValue = Double.valueOf(interestRate) / 100;
         double amountValue = Double.valueOf(amount);
+        double contributionValue = Double.valueOf(contribution);
+        double amountValueMinusContribution = amountValue - contributionValue;
 
-        double monthValue = (amountValue * interestRateValue /12) / (1-(Math.pow((1+interestRateValue/12),(-12*yearsValue))));
+        double monthValue = (amountValueMinusContribution * interestRateValue /12) / (1-(Math.pow((1+interestRateValue/12),(-12*yearsValue))));
         double monthValueFormat = (int)(Math.round(monthValue * 100))/100.0;
-        paymentEveryMonth.setText(Double.toString(monthValueFormat));
+        return Double.toString(monthValueFormat);
+    }
 
-        double totalInterestValue = 12 * yearsValue * monthValue - amountValue;
+    public String calculateTotalInterest(String amount, String monthValue, String years, String contribution) {
+        double yearsValue = Double.valueOf(years);
+        double amountValue = Double.valueOf(amount);
+        double monthly = Double.valueOf(monthValue);
+        double contributionValue = Double.valueOf(contribution);
+        double amountValueMinusContribution = amountValue - contributionValue;
+
+        double totalInterestValue = 12 * yearsValue * monthly - amountValueMinusContribution;
         double totalInterestValueFormat = (int)(Math.round(totalInterestValue * 100))/100.0;
-        totalInterest.setText(Double.toString(totalInterestValueFormat));
+        return Double.toString(totalInterestValueFormat);
+    }
 
-        double totalPaymentValue = totalInterestValue + amountValue;
+    public String calculateTotalPayment(String amount, String totalInterest, String contribution) {
+
+        double amountValue = Double.valueOf(amount);
+        double contributionValue = Double.valueOf(contribution);
+        double amountValueMinusContribution = amountValue - contributionValue;
+        double totalInterestValue = Double.valueOf(totalInterest);
+        double totalPaymentValue = totalInterestValue + amountValueMinusContribution;
         double totalPaymentValueFormat = (int)(Math.round(totalPaymentValue * 100))/100.0;
-        totalPayment.setText(Double.toString(totalPaymentValueFormat));
+        return Double.toString(totalPaymentValueFormat);
+
     }
 
 

@@ -10,7 +10,6 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 
 import com.example.realestatemanager.R;
-import com.example.realestatemanager.Utils;
 import com.example.realestatemanager.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Utils.isInternetAvailable(this);
 
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
@@ -30,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_item_detail);
 
-        // Define Navcontroller which manage the navigation navigation
+        // Define navController which manage the navigation navigation
         NavController navController = navHostFragment.getNavController();
 
        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.
                 Builder(navController.getGraph())
                 .build();
 
-        // Permet de lier l'action bar avec le navController
+        // Allow to bind action bar with navController
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
     }

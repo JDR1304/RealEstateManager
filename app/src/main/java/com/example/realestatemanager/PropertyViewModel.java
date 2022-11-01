@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 
-import com.example.realestatemanager.database.PropertyDAO;
 import com.example.realestatemanager.models.Photo;
 import com.example.realestatemanager.models.PropertiesFiltered;
 import com.example.realestatemanager.models.Property;
@@ -177,7 +176,7 @@ public class PropertyViewModel extends ViewModel {
             args.add(propertiesFiltered.getNumberOfBedRoomsValue());
         }
 
-        if (propertiesFiltered.getCityValue()!= null && !propertiesFiltered.getCityValue().isEmpty() ) {
+        if (propertiesFiltered.getCityValue() != null && !propertiesFiltered.getCityValue().isEmpty()) {
             if (containsCondition) {
                 queryString += " AND";
             } else {
@@ -242,51 +241,10 @@ public class PropertyViewModel extends ViewModel {
         }
 
         SimpleSQLiteQuery query = new SimpleSQLiteQuery(queryString, args.toArray());
-       // SimpleSQLiteQuery q = new SimpleSQLiteQuery("SELECT * FROM PROPERTY WHERE pointsOfInterestSchool == 1");
         listPropertyFiltered = this.dataSourceProperty.getPropertiesFiltered(query);
-        //return listPropertyFiltered;
-
-
     }
 
-    public LiveData<List<PropertyWithPhoto>> getPropertyFiltered(){
+    public LiveData<List<PropertyWithPhoto>> getPropertyFiltered() {
         return listPropertyFiltered;
-    }
-
-
-    public String calculateMonthly(String amount, String interestRate, String years, String contribution) {
-        double yearsValue = Double.valueOf(years);
-        double interestRateValue = Double.valueOf(interestRate) / 100;
-        double amountValue = Double.valueOf(amount);
-        double contributionValue = Double.valueOf(contribution);
-        double amountValueMinusContribution = amountValue - contributionValue;
-
-        double monthValue = (amountValueMinusContribution * interestRateValue /12) / (1-(Math.pow((1+interestRateValue/12),(-12*yearsValue))));
-        double monthValueFormat = (int)(Math.round(monthValue * 100))/100.0;
-        return Double.toString(monthValueFormat);
-    }
-
-    public String calculateTotalInterest(String amount, String monthValue, String years, String contribution) {
-        double yearsValue = Double.valueOf(years);
-        double amountValue = Double.valueOf(amount);
-        double monthly = Double.valueOf(monthValue);
-        double contributionValue = Double.valueOf(contribution);
-        double amountValueMinusContribution = amountValue - contributionValue;
-
-        double totalInterestValue = 12 * yearsValue * monthly - amountValueMinusContribution;
-        double totalInterestValueFormat = (int)(Math.round(totalInterestValue * 100))/100.0;
-        return Double.toString(totalInterestValueFormat);
-    }
-
-    public String calculateTotalPayment(String amount, String totalInterest, String contribution) {
-
-        double amountValue = Double.valueOf(amount);
-        double contributionValue = Double.valueOf(contribution);
-        double amountValueMinusContribution = amountValue - contributionValue;
-        double totalInterestValue = Double.valueOf(totalInterest);
-        double totalPaymentValue = totalInterestValue + amountValueMinusContribution;
-        double totalPaymentValueFormat = (int)(Math.round(totalPaymentValue * 100))/100.0;
-        return Double.toString(totalPaymentValueFormat);
-
     }
 }

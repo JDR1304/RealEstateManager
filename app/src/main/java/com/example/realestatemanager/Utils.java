@@ -1,13 +1,9 @@
 package com.example.realestatemanager;
 
-
-
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -29,7 +25,7 @@ public class Utils {
      * @return
      */
     public static int convertDollarToEuro(int dollars){
-        return (int) Math.round(dollars * 0.812);
+        return (int) Math.round(dollars * 0.99);
     }
 
     /**
@@ -38,7 +34,7 @@ public class Utils {
      * @param euros
      * @return
      */
-    public static int convertEuroToDollar(int euros){ return (int) Math.round(euros / 0.812); }
+    public static int convertEuroToDollar(int euros){ return (int) Math.round(euros / 0.99); }
 
     /**
      * Conversion de la date d'aujourd'hui en un format plus approprié
@@ -66,6 +62,7 @@ public class Utils {
     */
 
 
+
     public static boolean isInternetAvailable(@NonNull Context context) {
 
         ConnectivityManager connMgr = (ConnectivityManager) context
@@ -77,15 +74,12 @@ public class Utils {
             NetworkInfo networkInfo = connMgr.getNetworkInfo(network);
             if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
                 isWifiConn |= networkInfo.isConnected();
-                Toast.makeText(context.getApplicationContext(), "Wifi connected", Toast.LENGTH_LONG).show();
             }
             if (networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
                 isMobileConn |= networkInfo.isConnected();
-                Toast.makeText(context.getApplicationContext(), "Mobile connected", Toast.LENGTH_LONG).show();
             }
             if (isWifiConn || isMobileConn) return true;
         }
-        Toast.makeText(context.getApplicationContext(), "Not connected", Toast.LENGTH_LONG).show();
         return false;
 
     }

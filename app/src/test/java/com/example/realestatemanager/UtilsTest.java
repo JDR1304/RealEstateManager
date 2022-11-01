@@ -24,7 +24,7 @@ import java.util.Calendar;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(MockitoJUnitRunner.class)
-public class ExampleUnitTest {
+public class UtilsTest {
 
     @Mock
     Context mockContext;
@@ -46,13 +46,13 @@ public class ExampleUnitTest {
     @Test
     public void conversionDollarToEuroTest() {
         int priceInDollar = 200_000;
-        assertEquals(162_400, Utils.convertDollarToEuro(priceInDollar));
+        assertEquals(198_000, Utils.convertDollarToEuro(priceInDollar));
     }
 
     @Test
     public void conversionEuroToDollarTest() {
         int priceInEuro = 200_000;
-        assertEquals(246_305, Utils.convertEuroToDollar(priceInEuro));
+        assertEquals(202_020, Utils.convertEuroToDollar(priceInEuro));
     }
 
     @Test
@@ -68,7 +68,14 @@ public class ExampleUnitTest {
 
         boolean value = Utils.isInternetAvailable(mockContext);
 
-        assertEquals(value, true);
+        assertTrue(value);
+
+        when(mockNetworkInfo.getType()).thenReturn(ConnectivityManager.TYPE_MOBILE);
+        when(mockNetworkInfo.isConnected()).thenReturn(true);
+
+        boolean valueMobile = Utils.isInternetAvailable(mockContext);
+
+        assertTrue(valueMobile);
 
     }
 }

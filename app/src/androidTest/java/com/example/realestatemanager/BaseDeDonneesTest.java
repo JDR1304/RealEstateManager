@@ -1,6 +1,6 @@
 package com.example.realestatemanager;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import android.content.Context;
 
@@ -27,13 +27,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
+
 
 @RunWith(AndroidJUnit4.class)
 public class BaseDeDonneesTest {
     /*
-     la règle @InstantTaskExecutorRule permet de forcer l'exécution de chaque test
-      de manière synchrone (donc sans les déporter dans un thread en background).
+     The rule @InstantTaskExecutorRule force the execution for each test
+      to synchronize (Not in a background thread).
      */
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
@@ -52,11 +52,11 @@ public class BaseDeDonneesTest {
             false, false, false, false,
             1662826711, 0, "Fabien Barry");
 
-    List<Photo> photosTest = new ArrayList<Photo>(Arrays.asList(
+    List<Photo> photosTest = new ArrayList<>(Arrays.asList(
             new Photo(1, "URI Photo1", "Photo1 name"),
             new Photo(1, "URI Photo2", "Photo2 name")));
 
-    List<Photo> photos2Test = new ArrayList<Photo>(Arrays.asList(
+    List<Photo> photos2Test = new ArrayList<>(Arrays.asList(
             new Photo(2, "URI Photo3", "Photo3 name"),
             new Photo(2, "URI Photo4", "Photo4 name")));
 
@@ -82,7 +82,7 @@ public class BaseDeDonneesTest {
         propertyDao.createPropertyWithPhotos(propertyTest, photosTest);
         PropertyWithPhoto readProperty = LiveDataTestUtil.getValue(propertyDao.getProperty(1));
 
-        assertTrue(readProperty.property.getRealEstateAgentName().equals("Jerome Diaz"));
+        assertEquals(readProperty.property.getRealEstateAgentName(),"Jerome Diaz" );
 
     }
 
@@ -92,19 +92,12 @@ public class BaseDeDonneesTest {
 
         PropertyWithPhoto readProperty = LiveDataTestUtil.getValue(propertyDao.getProperty(1));
 
-        assertTrue(readProperty.property.getRealEstateAgentName().equals("Jerome Diaz"));
-        /*
-        Changer
-        propertyTest.setRealEstateAgentName("Update Name");
-        propertyDao.updatePropertyWithPhotos(propertyTest, photosTest);
-         */
+        assertEquals(readProperty.property.getRealEstateAgentName(), "Jerome Diaz");
         readProperty.property.setRealEstateAgentName("Update Name");
         propertyDao.updatePropertyWithPhotos(readProperty.property, photosTest);
         PropertyWithPhoto readPropertyUpdate = LiveDataTestUtil.getValue(propertyDao.getProperty(1));
 
-
-        assertTrue(readPropertyUpdate.property.getRealEstateAgentName().equals("Update Name"));
-
+        assertEquals(readPropertyUpdate.property.getRealEstateAgentName(),"Update Name");
     }
 
     @Test
@@ -113,7 +106,7 @@ public class BaseDeDonneesTest {
 
         PropertyWithPhoto readProperty = LiveDataTestUtil.getValue(propertyDao.getProperty(1));
 
-        assertTrue(readProperty.property.getRealEstateAgentName().equals("Jerome Diaz"));
+        assertEquals(readProperty.property.getRealEstateAgentName(), "Jerome Diaz");
 
     }
 
@@ -124,9 +117,9 @@ public class BaseDeDonneesTest {
 
         List <PropertyWithPhoto> propertyWithPhotoList = LiveDataTestUtil.getValue(propertyDao.getProperties());
 
-        assertTrue(propertyWithPhotoList.get(0).property.getRealEstateAgentName().equals("Jerome Diaz"));
-        assertTrue(propertyWithPhotoList.get(1).property.getRealEstateAgentName().equals("Fabien Barry"));
-        assertTrue(propertyWithPhotoList.get(0).photos.get(0).getStringPhoto().equals("URI Photo1"));
+        assertEquals(propertyWithPhotoList.get(0).property.getRealEstateAgentName(),"Jerome Diaz");
+        assertEquals(propertyWithPhotoList.get(1).property.getRealEstateAgentName(), "Fabien Barry");
+
 
     }
 }

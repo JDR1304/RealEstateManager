@@ -39,23 +39,8 @@ public class PropertyWithPhotoContentProviderTest {
 
     }
 
-   /* @Test
-
-    public void getItemsWhenNoItemInserted() {
-
-        final Cursor cursor = mContentResolver.query(ContentUris.withAppendedId(PropertyWithPhotoContentProvider.URI_PROPERTY_WITH_PHOTO, USER_ID), null, null, null, null);
-
-        assertThat(cursor, notNullValue());
-
-        assertThat(cursor.getCount(), is(0));
-
-        cursor.close();
-
-    }*/
-
 
     @Test
-
     public void getPropertyWithPhoto() {
 
         final Cursor cursor = mContentResolver.query(ContentUris.withAppendedId(PropertyWithPhotoContentProvider.URI_PROPERTY_WITH_PHOTO, USER_ID), null, null, null, null);
@@ -65,6 +50,10 @@ public class PropertyWithPhotoContentProviderTest {
         assertThat(cursor.moveToFirst(), is(true));
 
         assertThat(cursor.getString(cursor.getColumnIndexOrThrow("propertyType")), is("Apartment"));
+
+        assertThat(cursor.getDouble(cursor.getColumnIndexOrThrow("priceInDollars")), is(1000000.0));
+
+        assertThat(cursor.getInt(cursor.getColumnIndexOrThrow("pointsOfInterestSchool")), is(0));
 
     }
 

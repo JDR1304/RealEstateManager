@@ -14,6 +14,8 @@ public class PropertyWithPhoto {
     (parentColumn = "id", entityColumn = "propertyId")
     public List<Photo> photos;
 
+
+
     public static PropertyWithPhoto fromContentValues(ContentValues values) {
 
         final PropertyWithPhoto propertyWithPhoto = new PropertyWithPhoto();
@@ -54,8 +56,7 @@ public class PropertyWithPhoto {
 
         if (values.containsKey("city")) propertyWithPhoto.property.getAddress().setCity(values.getAsString("city"));
 
-        //if (values.containsKey("city")) propertyWithPhoto.photos.etStvalues.getAsString("city"));
-
+        if (values.containsKey("stringPhoto")) propertyWithPhoto.photos.get(0).setStringPhoto(values.getAsString("stringPhoto"));
 
         return propertyWithPhoto;
 
