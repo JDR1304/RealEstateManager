@@ -60,9 +60,9 @@ public abstract class RealEstateManagerDataBase extends RoomDatabase {
                 contentValues.put("propertyEntryDate", 1657121856);
                 contentValues.put("propertySaleDate", 0);
                 contentValues.put("realEstateAgentName", "Diaz");
-                contentValues.put("street", "35 boulevard republique");
-                contentValues.put("postCode", 13410);
-                contentValues.put("city", "Lambesc");
+                contentValues.put("street", "820 rue André Ampère");
+                contentValues.put("postCode", 13851);
+                contentValues.put("city", "Aix en Provence");
                 db.insert("Property", OnConflictStrategy.IGNORE, contentValues);
 
                 ContentValues contentValuesProperty2 = new ContentValues();
@@ -80,9 +80,9 @@ public abstract class RealEstateManagerDataBase extends RoomDatabase {
                 contentValuesProperty2.put("propertyEntryDate", 1657121856);
                 contentValuesProperty2.put("propertySaleDate", 0);
                 contentValuesProperty2.put("realEstateAgentName", "Barry");
-                contentValuesProperty2.put("street", "15 boulevard republique");
-                contentValuesProperty2.put("postCode", 13410);
-                contentValuesProperty2.put("city", "Lambesc");
+                contentValuesProperty2.put("street", "20 rue George Claude");
+                contentValuesProperty2.put("postCode", 13290);
+                contentValuesProperty2.put("city", "Aix en Provence");
                 db.insert("Property", OnConflictStrategy.IGNORE, contentValuesProperty2);
 
 

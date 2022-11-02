@@ -1,7 +1,7 @@
 package com.example.realestatemanager.models;
 
 
-import androidx.annotation.NonNull;
+
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
