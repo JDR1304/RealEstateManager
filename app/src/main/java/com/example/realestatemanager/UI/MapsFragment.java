@@ -7,9 +7,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,34 +35,29 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsFragment extends Fragment {
+public class MapsFragment extends Fragment implements GoogleMap.OnMyLocationButtonClickListener,
+        GoogleMap.OnMyLocationClickListener,
+        OnMapReadyCallback{
 
     private Boolean isTablet;
     private Context mContext;
     private GoogleMap mMap;
-    private static final int DEFAULT_ZOOM = 16;
+    private static final int DEFAULT_ZOOM = 14;
     private PropertyViewModel propertyViewModel;
     private long property_id;
     private final String PROPERTY_ID_DETAILS = "property_id_details";
     private List<PropertyWithPhoto> propertyWithPhotoList = new ArrayList<>();
+    private Location location;
 
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+   /* private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        @Override
+
+       @Override
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
         }
-    };
+    };*/
 
     // Initialise it from onAttach()
     @Override
@@ -83,11 +80,15 @@ public class MapsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(callback);
-        }
         configureViewModel();
-        getProperties();
+        propertyViewModel.getLocation().observe(getActivity(), new Observer<Location>() {
+            @Override
+            public void onChanged(Location location) {
+                MapsFragment.this.location = location;
+                mapFragment.getMapAsync(MapsFragment.this);
+
+            }
+        });
     }
 
     private void configureViewModel() {
@@ -99,7 +100,6 @@ public class MapsFragment extends Fragment {
     public void getProperties() {
 
         Observer<List<PropertyWithPhoto>> results = new Observer<List<PropertyWithPhoto>>() {
-
             @Override
             public void onChanged(List<PropertyWithPhoto> propertyWithPhotos) {
                 propertyWithPhotoList.clear();
@@ -108,7 +108,7 @@ public class MapsFragment extends Fragment {
                     LatLng propertyPosition = getLocationFromAddress(mContext, getAddress(propertyWithPhotos.get(i)));
                     if (propertyPosition != null) {
                         mMap.addMarker(new MarkerOptions().position(propertyPosition).title(Long.toString(propertyWithPhotos.get(i).property.getId())));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(propertyPosition, DEFAULT_ZOOM));
+                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(propertyPosition, DEFAULT_ZOOM));
                     }
                 }
                 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -171,5 +171,29 @@ public class MapsFragment extends Fragment {
                 propertyWithPhoto.property.getAddress().getCity();
 
         return address;
+    }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        return false;
+    }
+
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.setMyLocationEnabled(true);
+        mMap.setOnMyLocationButtonClickListener(this);
+        mMap.setOnMyLocationClickListener(this);
+        // Add a marker at current place and move the camera
+        LatLng currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
+        mMap.addMarker(new MarkerOptions().position(currentPosition).title("Current position"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentPosition, DEFAULT_ZOOM));
+        getProperties();
     }
 }

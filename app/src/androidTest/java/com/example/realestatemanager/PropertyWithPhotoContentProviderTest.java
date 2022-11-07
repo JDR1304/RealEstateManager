@@ -26,7 +26,7 @@ public class PropertyWithPhotoContentProviderTest {
     private ContentResolver mContentResolver;
 
     // DATA SET FOR TEST
-    private static long USER_ID = 1;
+    private static long PROPERTY_ID = 1;
 
     @Before
 
@@ -43,7 +43,7 @@ public class PropertyWithPhotoContentProviderTest {
     @Test
     public void getPropertyWithPhoto() {
 
-        final Cursor cursor = mContentResolver.query(ContentUris.withAppendedId(PropertyWithPhotoContentProvider.URI_PROPERTY_WITH_PHOTO, USER_ID), null, null, null, null);
+        final Cursor cursor = mContentResolver.query(ContentUris.withAppendedId(PropertyWithPhotoContentProvider.URI_PROPERTY_WITH_PHOTO, PROPERTY_ID), null, null, null, null);
 
         assertThat(cursor, notNullValue());
 

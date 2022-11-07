@@ -79,7 +79,6 @@ public class ItemListFragment extends Fragment {
         // Leaving this not using view binding as it relies on if the view is visible the current
         // layout configuration (layout, layout-sw600dp)
         itemDetailFragmentContainer = view.findViewById(R.id.item_detail_nav_container);
-        //setTabletOrMobile();
         return view;
 
     }
@@ -87,6 +86,7 @@ public class ItemListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         navHostFragment = (NavHostFragment) getChildFragmentManager().findFragmentById(R.id.item_detail_nav_container);
     }
 
@@ -204,4 +204,9 @@ public class ItemListFragment extends Fragment {
         }
     }
 
+    public void getTabletContainer(View view){
+        // Leaving this not using view binding as it relies on if the view is visible the current
+        // layout configuration (layout, layout-sw600dp)
+        itemDetailFragmentContainer = view.findViewById(R.id.item_detail_nav_container);
+    }
 }

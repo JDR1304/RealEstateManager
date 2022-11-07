@@ -32,9 +32,10 @@ public class PropertyWithPhotoContentProvider extends ContentProvider {
                         @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         if (getContext() != null) {
 
-            long userId = ContentUris.parseId(uri);
+            long propertyId = ContentUris.parseId(uri);
 
-            final Cursor cursor = RealEstateManagerDataBase.getInstance(getContext()).propertyDao().getPropertyWithPhotoCursor(userId);
+            final Cursor cursor = RealEstateManagerDataBase.getInstance(getContext())
+                    .propertyDao().getPropertyWithPhotoCursor(propertyId);
 
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
 

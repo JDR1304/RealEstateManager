@@ -1,9 +1,11 @@
 package com.example.realestatemanager;
 
+import android.location.Location;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 
@@ -22,6 +24,9 @@ public class PropertyViewModel extends ViewModel {
     private PropertyRepository dataSourceProperty;
     private Executor executor;
     private LiveData<List<PropertyWithPhoto>> listPropertyFiltered;
+
+    //--------------------------------------
+    public MutableLiveData<Location> locationLiveData = new MutableLiveData<>();
 
 
     public PropertyViewModel(PropertyRepository dataSourceProperty, Executor executor) {
@@ -246,5 +251,15 @@ public class PropertyViewModel extends ViewModel {
 
     public LiveData<List<PropertyWithPhoto>> getPropertyFiltered() {
         return listPropertyFiltered;
+    }
+
+    //-----------------------------------------------------------
+
+    public MutableLiveData<Location> getLocation() {
+        return locationLiveData;
+    }
+
+    public void setLocation(Location location) {
+        this.locationLiveData.postValue(location);
     }
 }
