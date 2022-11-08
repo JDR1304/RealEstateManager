@@ -28,6 +28,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -47,7 +48,7 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMyLocationButt
     private long property_id;
     private final String PROPERTY_ID_DETAILS = "property_id_details";
     private List<PropertyWithPhoto> propertyWithPhotoList = new ArrayList<>();
-    private Location location;
+
 
 
    /* private OnMapReadyCallback callback = new OnMapReadyCallback() {
@@ -81,14 +82,8 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMyLocationButt
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         configureViewModel();
-        propertyViewModel.getLocation().observe(getActivity(), new Observer<Location>() {
-            @Override
-            public void onChanged(Location location) {
-                MapsFragment.this.location = location;
-                mapFragment.getMapAsync(MapsFragment.this);
+        mapFragment.getMapAsync(MapsFragment.this);
 
-            }
-        });
     }
 
     private void configureViewModel() {
@@ -108,7 +103,6 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMyLocationButt
                     LatLng propertyPosition = getLocationFromAddress(mContext, getAddress(propertyWithPhotos.get(i)));
                     if (propertyPosition != null) {
                         mMap.addMarker(new MarkerOptions().position(propertyPosition).title(Long.toString(propertyWithPhotos.get(i).property.getId())));
-                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(propertyPosition, DEFAULT_ZOOM));
                     }
                 }
                 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -187,13 +181,17 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMyLocationButt
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMyLocationEnabled(true);
-        mMap.setOnMyLocationButtonClickListener(this);
-        mMap.setOnMyLocationClickListener(this);
         // Add a marker at current place and move the camera
-        LatLng currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(currentPosition).title("Current position"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentPosition, DEFAULT_ZOOM));
+        propertyViewModel.getLocation().observe(getActivity(), new Observer<Location>() {
+            @Override
+            public void onChanged(Location location) {
+                LatLng currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentPosition, DEFAULT_ZOOM));
+                mMap.setMyLocationEnabled(true);
+                mMap.setOnMyLocationButtonClickListener(MapsFragment.this);
+                mMap.setOnMyLocationClickListener(MapsFragment.this);
+            }
+        });
         getProperties();
     }
 }
