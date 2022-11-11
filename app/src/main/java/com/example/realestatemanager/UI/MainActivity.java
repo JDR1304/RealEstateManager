@@ -34,13 +34,12 @@ public class MainActivity extends AppCompatActivity {
    private ActivityMainBinding activityMainBinding;
    private PropertyViewModel propertyViewModel;
 
-//--------------------------------------------------------------
     //Google's API for location services
     private FusedLocationProviderClient fusedLocationProviderClient;
     //Config for all setting related to FusedLocationProviderClient
     private LocationRequest locationRequest;
     private final int locationRequestCode = 1000;
-//---------------------------------------------------------------
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//--------------------------------------------------------------------
 public void updateGps() {
 
     getLocationRequest();
@@ -130,7 +128,5 @@ public void updateGps() {
             }
         }
     }
-//---------------------------------------------------------------------------------------
-
 
 }

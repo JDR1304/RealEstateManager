@@ -15,6 +15,10 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -56,7 +60,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void isInternetAvailableTest(){
+    public void isInternetAvailableTest() throws IOException {
         Network [] allNetworks = new Network[1];
         allNetworks[0] = mockNetwork;
 
@@ -77,5 +81,19 @@ public class UtilsTest {
 
         assertTrue(valueMobile);
 
+        assertTrue(isOnline());
+
+    }
+
+    public boolean isOnline() {
+        try {
+            int timeoutMs = 1500;
+            Socket sock = new Socket();
+            SocketAddress socketAddress = new InetSocketAddress("8.8.8.8", 53);
+            sock.connect(socketAddress, timeoutMs);
+            sock.close();
+            return true;
+
+        } catch (IOException e) { return false; }
     }
 }

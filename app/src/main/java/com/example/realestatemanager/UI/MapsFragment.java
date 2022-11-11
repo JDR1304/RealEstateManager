@@ -49,17 +49,6 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMyLocationButt
     private final String PROPERTY_ID_DETAILS = "property_id_details";
     private List<PropertyWithPhoto> propertyWithPhotoList = new ArrayList<>();
 
-
-
-   /* private OnMapReadyCallback callback = new OnMapReadyCallback() {
-
-
-       @Override
-        public void onMapReady(GoogleMap googleMap) {
-            mMap = googleMap;
-        }
-    };*/
-
     // Initialise it from onAttach()
     @Override
     public void onAttach(Context context) {

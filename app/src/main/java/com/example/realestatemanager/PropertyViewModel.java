@@ -25,7 +25,6 @@ public class PropertyViewModel extends ViewModel {
     private Executor executor;
     private LiveData<List<PropertyWithPhoto>> listPropertyFiltered;
 
-    //--------------------------------------
     public MutableLiveData<Location> locationLiveData = new MutableLiveData<>();
 
 
@@ -252,8 +251,6 @@ public class PropertyViewModel extends ViewModel {
     public LiveData<List<PropertyWithPhoto>> getPropertyFiltered() {
         return listPropertyFiltered;
     }
-
-    //-----------------------------------------------------------
 
     public MutableLiveData<Location> getLocation() {
         return locationLiveData;

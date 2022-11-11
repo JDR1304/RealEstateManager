@@ -535,16 +535,21 @@ public class CreateAndUpdatePropertyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (propertyId == 0) {
-                    Address addressCreated = new Address(streetListenerValue, postCodeListenerValue, cityListenerValue);
-                    Property propertyCreated = new Property(propertyTypeListenerValue, priceInDollarsListenerValue, surfaceListenerValue,
-                            numberOfRoomsListenerValue, numberOfBathRoomsListenerValue, numberOfBedRoomsListenerValue,
-                            descriptionListenerValue, addressCreated, pointsOfInterestSchoolListenerValue, pointsOfInterestParkListenerValue,
-                            pointsOfInterestStoreListenerValue, propertyStatusListenerValue, System.currentTimeMillis(), 0,
-                            realEstateAgentNameListenerValue);
+                    if (streetListenerValue == null ||  postCodeListenerValue == 0 || cityListenerValue == null
+                     || priceInDollarsListenerValue == 0.0){
+                        Toast.makeText(getActivity(), "Fill in the property price and the address", Toast.LENGTH_LONG).show();
+                    } else {
+                        Address addressCreated = new Address(streetListenerValue, postCodeListenerValue, cityListenerValue);
+                        Property propertyCreated = new Property(propertyTypeListenerValue, priceInDollarsListenerValue, surfaceListenerValue,
+                                numberOfRoomsListenerValue, numberOfBathRoomsListenerValue, numberOfBedRoomsListenerValue,
+                                descriptionListenerValue, addressCreated, pointsOfInterestSchoolListenerValue, pointsOfInterestParkListenerValue,
+                                pointsOfInterestStoreListenerValue, propertyStatusListenerValue, System.currentTimeMillis(), 0,
+                                realEstateAgentNameListenerValue);
 
-                    propertyViewModel.createPropertyWithPhotos(propertyCreated, pictures);
+                        propertyViewModel.createPropertyWithPhotos(propertyCreated, pictures);
 
-                    Toast.makeText(getActivity(), "Property Created", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Property Created", Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     // Get property photo and add to the list where I already add photos.
                     for (int i = 0; i < propertyWithPhoto.photos.size(); i++) {
